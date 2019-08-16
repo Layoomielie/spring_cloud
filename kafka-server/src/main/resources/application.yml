@@ -1,0 +1,29 @@
+spring:
+  kafka:
+    bootstrap-servers: 10.100.23.91:9092,10.100.23.92:9092,10.100.23.93:9092
+    producer:
+      batch-size: 16384
+      buffer-memory: 1351322
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 消息发送模式 all 为 leader 和 flower都接收到 表示成功  1为leader接收到算成功  0为只要发送表示成功
+      acks: 1
+
+    consumer:
+      group-id: My-SpringCloud
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: latest
+  application:
+    name: kafka-service
+server:
+  port: 8775
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true

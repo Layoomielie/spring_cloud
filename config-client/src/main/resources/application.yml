@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: config-client-application
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 47.103.17.23
+    port: 5672
+  cloud:
+    bus:
+      trace:
+        enabled: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  #客户端
+  client:
+    #注册中心地址
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+

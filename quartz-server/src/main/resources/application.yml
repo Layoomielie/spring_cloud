@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    username: root
+    password: 44253432
+    url: jdbc:mysql://47.101.171.168:3306/quartz
+application:
+  name: quartz-server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8776
+hystrix:
+  metrics:
+    enabled: true
+    polling-interval-ms: 2000
+#  quartz:
+#    job-store-type: jdbc
+#    jdbc:
+#      initialize-schema: embedded
+#    properties:
+#      org:
+#        quartz:
+#          scheduler:
+#            instanceName: MyScheduler
+#            instanceId: AUTO
+#          jobStore:
+#            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#            tablePrefix: QRTZ_
+#            isClustered: true
+#            clusterCheckinInterval: 10000
+#            useProperties: false
+#          threadPool:
+#            class: org.quartz.simpl.SimpleThreadPool
+#            threadCount: 10
+#            threadPriority: 5
+#            threadsInheritContextClassLoaderOfInitializingThread: true

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/hi-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ribbon-service/pom.xml" />
+        <option value="$PROJECT_DIR$/feige-server/pom.xml" />
+        <option value="$PROJECT_DIR$/stream-service/pom.xml" />
+        <option value="$PROJECT_DIR$/stream1-service/pom.xml" />
+        <option value="$PROJECT_DIR$/stream2-service/pom.xml" />
+        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/config-client/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/elasticsearch-server/pom.xml" />
+        <option value="$PROJECT_DIR$/quartz-server/pom.xml" />
+        <option value="$PROJECT_DIR$/actuator-server/pom.xml" />
+        <option value="$PROJECT_DIR$/security-server/pom.xml" />
+        <option value="$PROJECT_DIR$/rabbit-server/pom.xml" />
+        <option value="$PROJECT_DIR$/freemark-server/pom.xml" />
+        <option value="$PROJECT_DIR$/jpush-server/pom.xml" />
+        <option value="$PROJECT_DIR$/thread-server/pom.xml" />
+        <option value="$PROJECT_DIR$/shiro-service/pom.xml" />
+        <option value="$PROJECT_DIR$/turbin-service/pom.xml" />
+        <option value="$PROJECT_DIR$/upload-service/pom.xml" />
+        <option value="$PROJECT_DIR$/sleuth-server/pom.xml" />
+        <option value="$PROJECT_DIR$/zipkin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/ice-service/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/eureka-service/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="jdk1.8.0_144" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

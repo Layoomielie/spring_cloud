@@ -1,0 +1,21 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+spring:
+  freemarker:
+    template-loader-path: classpath:/templates
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: requests
+    suffix: .ftl
+    charset: UTF-8
+    cache: false
+  application:
+    name: freemark-server
+server:
+  port: 8901

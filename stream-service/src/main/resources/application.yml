@@ -1,0 +1,32 @@
+server:
+  port: 8767
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 10.100.23.92:9092
+          auto-create-topics: true
+      dynamic-destinations: stream-demo
+      bindings:
+        output:
+          destination: stream-demo
+          content-type: text/plain
+        myOutput:
+          destination: stream-demo
+          content-type: text/plain
+
+  kafka:
+    consumer:
+      group-id: stream
+  application:
+    name: stream-service
+eureka:
+  #客户端
+  client:
+    #注册中心地址
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

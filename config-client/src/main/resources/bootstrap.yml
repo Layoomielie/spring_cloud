@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      #name: config-client-application
+      profile: test
+      label: master
+      # url 或discovery 二选一
+      #uri: http://localhost:8772
+      discovery:
+        enabled: true
+        service-id: config-server

@@ -1,0 +1,26 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+    healthcheck:
+      enabled: false
+server:
+  port: 8763
+spring:
+  application:
+    name: hi-service
+
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  eureka:
+    enabled: true
+
+user:
+  audiences:
+      ali: "44253432"
+      spring: "12345"
+  name: "good"

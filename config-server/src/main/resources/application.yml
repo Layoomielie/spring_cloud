@@ -1,0 +1,23 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8772
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Layoomielie/springcloud-config.git
+    bus:
+      trace:
+        enabled: true
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 47.103.17.23
+    port: 5672
+

@@ -1,0 +1,17 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+server:
+  port: 8770
+spring:
+  application:
+    name: turbine-service
+#  rabbitmq:
+#    host: 47.103.17.23
+
+turbine:
+  app-config: ZUUL-SERVER
+  cluster-name-expression: "'default'"

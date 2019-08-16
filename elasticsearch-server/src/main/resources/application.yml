@@ -1,0 +1,13 @@
+server:
+  port: 8776
+spring:
+  application:
+    name: elasticsearch-server
+  data:
+    elasticsearch:
+      cluster-nodes: 10.100.23.92:9300,10.100.23.91:9300,10.100.23.93:9300
+      cluster-name: es_cluster
+management:
+  health:
+    elasticsearch:
+      enabled: false

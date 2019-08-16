@@ -1,0 +1,20 @@
+management:
+  endpoint:
+    health:
+      show-details: always
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.home@
+server:
+  port: 8778
+
+spring:
+  security:
+    user:
+      name: admin
+      password: 44253432
+      roles: ACTUATOR_ADMIN

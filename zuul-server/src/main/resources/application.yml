@@ -1,0 +1,66 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: zuul-server
+#  rabbitmq:
+#    host: 47.103.17.23
+#    port: 5672
+#    username: guest
+#    password: guest
+#zuul:
+#  routes:
+#    feige-server:
+#      path: /feige-server/**
+#      serviceId: feige-server
+#    ribbon-service:
+#      path: /ribbon-service/**
+#      serviceId: ribbon-service
+#    stream-service:
+#      path: /stream-service/**
+#      serviceId: stream-service
+#    stream1-service:
+#      path: /stream1-service/**
+#      serviceId: stream1-service
+#    stream2-service:
+#      path: /stream2-service/**
+#      serviceId: stream2-service
+eureka:
+  #客户端
+  client:
+    #注册中心地址
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    com.example: debug
+#ribbon:
+#  ConnectTimeout: 3000
+#  ReadTimeout: 60000
+hystrix:
+  metrics:
+    polling-interval-ms: 60000
+zuul:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+    max-total-connections: 500
+  # 配置zuul饥饿加载   默认是懒加载  初始启动慢
+  ribbon:
+    eager-load:
+      enabled: true
+#设置 zuul网关超时
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 10000

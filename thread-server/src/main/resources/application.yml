@@ -1,0 +1,6 @@
+#head:
+#  imap: ${head.imap}
+head:
+  imap:
+    key1: "dalo"
+    key2: "xiaolou"
