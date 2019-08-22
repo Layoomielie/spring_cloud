@@ -1,6 +1,9 @@
 package com.example.controller;
 
 import com.example.entity.GoodEntity;
+import com.example.entity.LoginEntity;
+import com.example.util.StringUtils;
+import com.example.util.TokenProccessor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +17,7 @@ import java.util.List;
  * @desc：
  **/
 @RestController
-public class HelloController {
+public class LoginController {
 
     @CrossOrigin(origins = "*")
     @RequestMapping("test")
@@ -27,5 +30,15 @@ public class HelloController {
         lists.add(good2);
         lists.add(good3);
         return lists;
+    }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping("login")
+    public LoginEntity login(){
+        LoginEntity loginEntity = new LoginEntity();
+        loginEntity.setUuid(StringUtils.getUUid());
+        loginEntity.setToken(TokenProccessor.makeToken());
+        loginEntity.setName("ali");
+        return loginEntity;
     }
 }

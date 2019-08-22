@@ -1,2 +1,9 @@
 server:
   port: 12000
+  max-http-header-size: 8192
+spring:
+  data:
+    mongodb:
+      database: local
+      password: 44253432
+      host: 47.101.171.168
