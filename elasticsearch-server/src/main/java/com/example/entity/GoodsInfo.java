@@ -94,4 +94,15 @@ public class GoodsInfo implements Serializable {
 
     public GoodsInfo() {
     }
+
+    @Override
+    public String toString() {
+        return "GoodsInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", time='" + time + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

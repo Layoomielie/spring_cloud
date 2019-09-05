@@ -1,11 +1,18 @@
 package com.example.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.example.dao.GoodsRepository;
 import com.example.entity.GoodsInfo;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -14,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +40,14 @@ import java.util.*;
 public class GoodsController {
 
     @Autowired
+    ElasticsearchTemplate elasticsearchTemplate;
+
+    @Autowired
     private GoodsRepository goodsRepository;
     Date date = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     String dates = dateFormat.format(date);
+
 
     @GetMapping("save")
     public String save() {
@@ -55,7 +67,7 @@ public class GoodsController {
     public String saveAll() {
         List<GoodsInfo> list = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10000; i++) {
             GoodsInfo goodsInfo = new GoodsInfo(i, "商品" + i, i, dates, "这是一个测试" + i + "商品");
             list.add(goodsInfo);
         }
@@ -107,7 +119,6 @@ public class GoodsController {
         size = 1;
         PageRequest pageable = new PageRequest(page, size);
         QueryStringQueryBuilder builder = new QueryStringQueryBuilder(q);
-
         Page<GoodsInfo> infos = goodsRepository.search(builder, pageable);
         Iterator<GoodsInfo> iterator = infos.iterator();
         List<GoodsInfo> list = new ArrayList<>();
@@ -118,14 +129,80 @@ public class GoodsController {
         return list;
     }
 
+    @GetMapping("search/after")
+    public Object goodSearchAfter(String... sortValues) {
+        SearchRequestBuilder searchRequestBuilder = elasticsearchTemplate.getClient().prepareSearch("goods");
+        searchRequestBuilder = searchRequestBuilder.addSort(SortBuilders.fieldSort("price")).addSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC));
+        searchRequestBuilder.setSize(10);
+        if (sortValues != null) {
+            searchRequestBuilder.searchAfter(sortValues);
+        }
+        SearchResponse response = searchRequestBuilder.execute().actionGet();
+        SearchHit[] hits = response.getHits().getHits();
+        Object[] sortValue = null;
+        for (int i = 0; i < hits.length; i++) {
+            String sourceAsString = hits[i].getSourceAsString();
+            System.out.println(sourceAsString);
+
+            if (i == hits.length - 1) {
+                sortValue = hits[i].getSortValues();
+            }
+        }
+        return sortValue;
+    }
+
+    @GetMapping("search/scroll")
+    public void goodSearchScroll() {
+        Client client = elasticsearchTemplate.getClient();
+
+        FieldSortBuilder sortBuilder = SortBuilders.fieldSort("type").order(SortOrder.DESC);
+
+
+        SearchResponse response = client.prepareSearch("goods").setTypes("doc").addSort(SortBuilders.fieldSort("price")).addSort(SortBuilders.fieldSort("_doc")).addSort(SortBuilders.fieldSort("price"))
+                .setSize(10).setScroll(TimeValue.timeValueMinutes(2)).execute()
+                .actionGet();
+
+        System.out.println("当前hits数量为：  " + response.getHits().getHits().length);
+        int i = 1;
+        System.out.println(response.getScrollId());
+        System.out.println("---------------------------------");
+
+        while (response.getHits().getHits().length > 0) {
+            String scrollId = response.getScrollId();
+            i++;
+            if (i > 5) {
+                return;
+            }
+            response = client.prepareSearchScroll(scrollId)
+                    .setScroll(TimeValue.timeValueMinutes(2))//设置查询context的存活时间
+                    .execute()
+                    .actionGet();
+            List<GoodsInfo> list = new ArrayList<>();
+            SearchHits hits = response.getHits();
+            for (SearchHit hit : hits.getHits()) {
+                String hitString = hit.getSourceAsString();
+                GoodsInfo goodsInfo = JSON.parseObject(hitString, GoodsInfo.class);
+                list.add(goodsInfo);
+            }
+
+            list.forEach(goodsInfo -> System.out.println(goodsInfo.toString()));
+            System.out.println("---------------------------------");
+        }
+
+        //  list.forEach(goodsInfo -> System.out.println(goodsInfo.toString()));
+//        ClearScrollRequest request = new ClearScrollRequest();
+//        request.addScrollId(response.getScrollId());
+//        client.clearScroll(request);
+    }
+
     //排序
     @GetMapping("search/sort")
     public List<GoodsInfo> goodSearchSort(Boolean boo) {
+
         Iterable<GoodsInfo> infos;
         if (boo) {
             infos = goodsRepository.findAll(Sort.by("price").ascending());
         } else {
-
             infos = goodsRepository.findAll(Sort.by("price").descending());
         }
         List<GoodsInfo> list = new ArrayList<>();
@@ -138,6 +215,21 @@ public class GoodsController {
      * */
     @GetMapping("search/term")
     public List<GoodsInfo> goodSearchTerm(String name) {
+
+        //自定义查询条件器
+        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
+
+        builder.withQuery(QueryBuilders.termQuery("name", name));
+
+        // 查询结果自动分页
+        Page<GoodsInfo> infos = goodsRepository.search(builder.build());
+        List<GoodsInfo> goodsInfos = new ArrayList<>();
+        infos.forEach(goodsInfo -> goodsInfos.add(goodsInfo));
+        return goodsInfos;
+    }
+
+    @GetMapping("search/terms")
+    public List<GoodsInfo> goodSearchTerms(String name) {
 
         //自定义查询条件器
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();

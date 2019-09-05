@@ -1,7 +1,9 @@
 package com.example;
 
+import com.example.dao.AggregationDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,8 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ElasticsearchServerApplicationTests {
 
+    @Autowired
+    AggregationDao aggregationDao;
+
     @Test
     public void contextLoads() {
+
     }
+
 
 }
