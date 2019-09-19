@@ -7,10 +7,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -22,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -131,8 +129,9 @@ public class GoodsController {
 
     @GetMapping("search/after")
     public Object goodSearchAfter(String... sortValues) {
+        long startTime = System.currentTimeMillis();
         SearchRequestBuilder searchRequestBuilder = elasticsearchTemplate.getClient().prepareSearch("goods");
-        searchRequestBuilder = searchRequestBuilder.addSort(SortBuilders.fieldSort("price")).addSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC));
+        searchRequestBuilder = searchRequestBuilder.addSort(SortBuilders.fieldSort("price")).addSort(SortBuilders.fieldSort("id")).addSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC));
         searchRequestBuilder.setSize(10);
         if (sortValues != null) {
             searchRequestBuilder.searchAfter(sortValues);
@@ -148,7 +147,26 @@ public class GoodsController {
                 sortValue = hits[i].getSortValues();
             }
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime);
         return sortValue;
+    }
+    @GetMapping("search/entity")
+    public Object goodSearchEntity() {
+        long startTime = System.currentTimeMillis();
+        SearchRequestBuilder searchRequestBuilder = elasticsearchTemplate.getClient().prepareSearch("goods");
+        searchRequestBuilder = searchRequestBuilder.addSort(SortBuilders.fieldSort("price")).addSort(SortBuilders.fieldSort("id")).addSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC));
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        nativeSearchQueryBuilder.withSort(SortBuilders.fieldSort("price")).withSort(SortBuilders.fieldSort("id")).withSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC));
+        PageRequest page = PageRequest.of(800, 10);
+        nativeSearchQueryBuilder.withPageable(page);
+        AggregatedPage<GoodsInfo> goodsInfos = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), GoodsInfo.class);
+        goodsInfos.forEach(goodsInfo -> {
+            System.out.println(goodsInfo);
+        });
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime);
+        return null;
     }
 
     @GetMapping("search/scroll")
@@ -156,7 +174,6 @@ public class GoodsController {
         Client client = elasticsearchTemplate.getClient();
 
         FieldSortBuilder sortBuilder = SortBuilders.fieldSort("type").order(SortOrder.DESC);
-
 
         SearchResponse response = client.prepareSearch("goods").setTypes("doc").addSort(SortBuilders.fieldSort("price")).addSort(SortBuilders.fieldSort("_doc")).addSort(SortBuilders.fieldSort("price"))
                 .setSize(10).setScroll(TimeValue.timeValueMinutes(2)).execute()

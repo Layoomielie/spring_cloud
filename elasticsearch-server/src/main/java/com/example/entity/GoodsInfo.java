@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @Description
  */
 
-@Document(indexName = "goods",type = "doc")
+@Document(indexName = "good*",type = "doc")
 //@Mapping(mappingPath = "goods.json")
 public class GoodsInfo implements Serializable {
     @Id

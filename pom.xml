@@ -14,6 +14,7 @@
         <module>hi-service</module>
         <module>ribbon-service</module>
         <module>zuul-server</module>
+        <module>appframework</module>
     </modules>
 
 
