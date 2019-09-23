@@ -26,6 +26,7 @@ public class QianchengController {
     @Autowired
     private PositionRepository positionRepository;
 
+
     @CrossOrigin(origins = "*")
     @RequestMapping("query")
     public Object query(){

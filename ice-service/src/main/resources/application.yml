@@ -7,3 +7,7 @@ spring:
       database: local
       password: 44253432
       host: 47.101.171.168
+  redis:
+    host: 139.224.233.92
+    port: 6379
+
