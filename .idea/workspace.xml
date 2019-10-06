@@ -3,45 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e48c6876-8e62-49a7-9acf-6cdfcfa984dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elasticsearch-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/elasticsearch-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hi-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hi-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ice-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ice-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ribbon-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ribbon-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zuul-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zuul-server/pom.xml" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path="$PROJECT_DIR$/eureka-service/target/" />
-    <ignored path="$PROJECT_DIR$/eureka-server/target/" />
-    <ignored path="$PROJECT_DIR$/hi-service/target/" />
-    <ignored path="$PROJECT_DIR$/ribbon-service/target/" />
-    <ignored path="$PROJECT_DIR$/ferigin-server/target/" />
-    <ignored path="$PROJECT_DIR$/feige-server/target/" />
-    <ignored path="$PROJECT_DIR$/stream-service/target/" />
-    <ignored path="$PROJECT_DIR$/stream1-service/target/" />
-    <ignored path="$PROJECT_DIR$/stream2-service/target/" />
-    <ignored path="$PROJECT_DIR$/zuul-server/target/" />
-    <ignored path="$PROJECT_DIR$/config-server/target/" />
-    <ignored path="$PROJECT_DIR$/config-client/target/" />
-    <ignored path="$PROJECT_DIR$/kafka/target/" />
-    <ignored path="$PROJECT_DIR$/kafka-server/target/" />
-    <ignored path="$PROJECT_DIR$/elasticsearch-server/target/" />
-    <ignored path="$PROJECT_DIR$/quartz-server/target/" />
-    <ignored path="$PROJECT_DIR$/actuator-server/target/" />
-    <ignored path="$PROJECT_DIR$/security-server/target/" />
-    <ignored path="$PROJECT_DIR$/rabbit-server/target/" />
-    <ignored path="$PROJECT_DIR$/alipay-server/target/" />
-    <ignored path="$PROJECT_DIR$/freemark-server/target/" />
-    <ignored path="$PROJECT_DIR$/jpush-server/target/" />
-    <ignored path="$PROJECT_DIR$/thread-server/target/" />
-    <ignored path="$PROJECT_DIR$/shiro-service/target/" />
-    <ignored path="$PROJECT_DIR$/turbin-service/target/" />
-    <ignored path="$PROJECT_DIR$/upload-service/target/" />
-    <ignored path="$PROJECT_DIR$/sleuth-server/target/" />
-    <ignored path="$PROJECT_DIR$/zipkin-server/target/" />
-    <ignored path="$PROJECT_DIR$/ice-service/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,157 +14,32 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
-  </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/springcloud$ShiroServiceApplication.ic" NAME="ShiroServiceApplication Coverage Results" MODIFIED="1563346877600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1280881215">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.opened" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="1-SNAPSHOT" value="1" />
-          <entry key="cmd" value="1" />
-          <entry key="xml" value="8" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="UML" value="1" />
-          <entry key="XML" value="8" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="xml" value="6" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="XML" value="6" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ice-service/src/main/java/com/example/controller/HelloController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ice-service/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/elasticsearch-server/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="uml://MAVEN/com.example:eureka-server:0.0.1-SNAPSHOT">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>MAVEN</ID>
-              <OriginalElement>com.example:eureka-server:0.0.1-SNAPSHOT</OriginalElement>
-              <nodes>
-                <node x="0.0" y="0.0">com.example:eureka-server:0.0.1-SNAPSHOT</node>
-              </nodes>
-              <notes />
-              <edges />
-              <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="-408.13888888888874" y="-161.83333333333331" />
-              <SelectedNodes>
-                <node>com.example:eureka-server:0.0.1-SNAPSHOT</node>
-              </SelectedNodes>
-              <Categories />
-              <VISIBILITY>All</VISIBILITY>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eureka-server/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/zuul-server/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ribbon-service/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="42" column="44" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hi-service/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/feige-server/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aliyun" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="aliyun" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -243,71 +81,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="AUTO_COMMIT_ON_CHERRY_PICK" value="true" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/elasticsearch-server/src/main/java/com/example/dao/GoodsRepository.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/annotation/PassToken.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/annotation/UserLoginToken.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/entity.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/entity/User.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/config/InterceptorConfig.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/service/UserService.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/util/JsonUtils.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/resources/person.json" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/util/CityConstants.java" />
-        <option value="$PROJECT_DIR$/thread-server/pom.xml" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/config/IConfig.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/test/java/com/example/myTest.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/util/JwtUtil.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/interceptor/AuthenticationInterceptor.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/HiServiceApplication.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/controller/hiController.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/test/java/com/example/HiServiceApplicationTests.java" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/hi-service/src/main/java/com/example/util/Cons.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo1/Mythread.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo1/Run.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo2.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo2/Run.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo2/MyThread.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/StackTrace.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/Test1.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/dumpStack.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/DumpStack.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/demo1.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread1.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread2.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/demo2.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread3.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/demo3.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/suspend/MyThread.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/suspend/MyThread1.java" />
-        <option value="$PROJECT_DIR$/thread-server/src/main/java/com/example/suspend/demo1.java" />
-        <option value="$PROJECT_DIR$/ice-service/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/ice-service/src/main/java/com/example/entity/GoodEntity.java" />
-        <option value="$PROJECT_DIR$/ice-service/src/main/java/com/example/controller/HelloController.java" />
-        <option value="$PROJECT_DIR$/ice-service/pom.xml" />
-        <option value="$PROJECT_DIR$/elasticsearch-server/pom.xml" />
-        <option value="$PROJECT_DIR$/ribbon-service/pom.xml" />
-        <option value="$PROJECT_DIR$/hi-service/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
-      </list>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="F:\git\spring_cloud\.idea" />
+      </set>
     </option>
-  </component>
-  <component name="JRebelWorkspace">
-    <option name="jrebelEnabledAutocompile" value="true" />
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -323,132 +102,29 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
-  </component>
+  <component name="ProjectId" id="1R9pzPigbTTCDik76qSzNSM12Tf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="eureka-server" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="eureka-server" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="feige-server" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="feige-server" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="hi-service" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="hi-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="hi-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-              <item name="controller" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="ribbon-service" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="stream1-service" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="stream1-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="stream-service" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="stream-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="zuul-server" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="springcloud" type="58d84e3e:PackageViewProjectNode" />
-              <item name="zuul-server" type="616d4139:PackageViewModuleNode" />
-              <item name="com.example" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="spring_cloud" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring_cloud" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring_cloud" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring_cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="zuul-server" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566111413626" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568820205874" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -492,19 +168,6 @@
     <option name="contentProportion" value="0.1845238" />
   </component>
   <component name="RunManager" selected="Spring Boot.IceServiceApplication">
-    <configuration name="DumpStack" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.stack.DumpStack" />
-      <module name="thread-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.stack.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="demo1 (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.suspend.demo1" />
       <module name="thread-server" />
@@ -557,9 +220,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.thread.main" />
+      <module name="thread-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.thread.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ActuatorServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="actuator-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.ActuatorServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="config-client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.configclient.ConfigClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.ConfigServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -585,6 +275,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FreemarkServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="freemark-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.FreemarkServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HiServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="hi-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.HiServiceApplication" />
@@ -599,6 +296,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JpushServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jpush-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.JpushServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KafkaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="kafka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.KafkaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuartzServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="quartz-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.QuartzServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RabbitServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="rabbit-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.rabbitserver.RabbitServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RibbonServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="ribbon-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.RibbonServiceApplication" />
@@ -606,9 +331,72 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SecurityServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="security-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.SecurityServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShiroServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="shiro-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.ShiroServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SleuthServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sleuth-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.SleuthServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Stream1ServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="stream1-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.Stream1ServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Stream2ServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="stream2-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.Stream2ServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="stream-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.StreamServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ThreadServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="thread-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.ThreadServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TurbinServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="turbin-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.TurbinServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UploadServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="upload-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.UploadServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZipkinServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="zipkin-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.ZipkinServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -621,13 +409,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.ThreadServerApplication" />
-      <item itemvalue="Spring Boot.IceServiceApplication" />
-      <item itemvalue="Application.DumpStack" />
       <item itemvalue="Application.demo1" />
       <item itemvalue="Application.demo2" />
       <item itemvalue="Application.demo3" />
       <item itemvalue="Application.demo1 (1)" />
+      <item itemvalue="Application.main" />
+      <item itemvalue="Spring Boot.ThreadServerApplication" />
+      <item itemvalue="Spring Boot.IceServiceApplication" />
       <item itemvalue="Spring Boot.ElasticsearchServerApplication" />
       <item itemvalue="Spring Boot.RibbonServiceApplication" />
       <item itemvalue="Spring Boot.HiServiceApplication" />
@@ -635,16 +423,43 @@
       <item itemvalue="Spring Boot.EurekaServerApplication" />
       <item itemvalue="Spring Boot.ZuulServerApplication" />
       <item itemvalue="Spring Boot.ActuatorServerApplication" />
+      <item itemvalue="Spring Boot.StreamServiceApplication" />
+      <item itemvalue="Spring Boot.ConfigClientApplication" />
+      <item itemvalue="Spring Boot.UploadServiceApplication" />
+      <item itemvalue="Spring Boot.TurbinServiceApplication" />
+      <item itemvalue="Spring Boot.Stream1ServiceApplication" />
+      <item itemvalue="Spring Boot.KafkaServerApplication" />
+      <item itemvalue="Spring Boot.ZipkinServerApplication" />
+      <item itemvalue="Spring Boot.SleuthServerApplication" />
+      <item itemvalue="Spring Boot.QuartzServerApplication" />
+      <item itemvalue="Spring Boot.ConfigServerApplication" />
+      <item itemvalue="Spring Boot.JpushServerApplication" />
+      <item itemvalue="Spring Boot.RabbitServerApplication" />
+      <item itemvalue="Spring Boot.Stream2ServiceApplication" />
+      <item itemvalue="Spring Boot.FreemarkServerApplication" />
+      <item itemvalue="Spring Boot.SecurityServerApplication" />
+      <item itemvalue="Spring Boot.ShiroServiceApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.main" />
         <item itemvalue="Application.demo1 (1)" />
         <item itemvalue="Application.demo3" />
         <item itemvalue="Application.demo2" />
         <item itemvalue="Application.demo1" />
-        <item itemvalue="Application.DumpStack" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <option name="contentProportion" value="0.1612554" />
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
   </component>
   <component name="SpringBootOptions">
     <option name="showAdditionalConfigNotification" value="false" />
@@ -734,7 +549,20 @@
       <workItem from="1565939090190" duration="7424000" />
       <workItem from="1566105876349" duration="612000" />
       <workItem from="1566110482458" duration="45000" />
-      <workItem from="1566110570853" duration="818000" />
+      <workItem from="1566110570853" duration="1737000" />
+      <workItem from="1566571278966" duration="1265000" />
+      <workItem from="1566726586929" duration="3205000" />
+      <workItem from="1567852550179" duration="2010000" />
+      <workItem from="1568039611774" duration="3716000" />
+      <workItem from="1568734102145" duration="1622000" />
+      <workItem from="1568735760124" duration="8957000" />
+      <workItem from="1568823120208" duration="43000" />
+      <workItem from="1569089430711" duration="204000" />
+      <workItem from="1569089655472" duration="584000" />
+      <workItem from="1569090268374" duration="281000" />
+      <workItem from="1569124615649" duration="2997000" />
+      <workItem from="1570068382983" duration="1243000" />
+      <workItem from="1570330350642" duration="998000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <created>1557493331106</created>
@@ -883,7 +711,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565954202874</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="补充依赖">
+      <created>1566111468347</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1566111468347</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -918,9 +753,6 @@
       <configuration name="HiServiceApplicationTests" configurationId="JUnit" />
     </history-entry>
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="577254000" />
-  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -930,64 +762,51 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4935065" visible="true" weight="0.22814499" />
-      <window_info id="Structure" order="1" sideWeight="0.501845" side_tool="true" weight="0.23347548" />
-      <window_info id="Designer" order="2" />
-      <window_info id="JRebel" order="3" sideWeight="0.5064935" side_tool="true" weight="0.14605543" />
-      <window_info id="Image Layers" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="UI Designer" order="6" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info id="Web" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.22381477" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.49888393" />
-      <window_info anchor="bottom" id="Spring" order="7" weight="0.32924107" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.21763393" />
-      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="ConsoleMavenPlugin" order="10" weight="0.03348214" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50159913" side_tool="true" visible="true" weight="0.22381477" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32924107" />
-      <window_info anchor="bottom" id="Problems" order="13" weight="0.32924107" />
-      <window_info anchor="bottom" id="SmartIM" order="14" weight="0.32924107" />
-      <window_info anchor="bottom" id="Database Changes" order="15" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="16" weight="0.2734375" />
-      <window_info anchor="bottom" id="JRebel Executor" order="17" weight="0.3359375" />
-      <window_info anchor="bottom" id="JRebel Console" order="18" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Messages" order="19" sideWeight="0.4989339" weight="0.32924107" />
-      <window_info anchor="bottom" id="Run Dashboard" order="20" sideWeight="0.49840087" weight="0.1477398" />
-      <window_info anchor="bottom" id="Alipay DevTools" order="21" weight="0.329718" />
-      <window_info anchor="bottom" id="Tail" order="22" />
-      <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.32995737" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="4" weight="0.23560767" />
-      <window_info anchor="right" id="Palette" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Jms Messenger" order="10" weight="0.32995737" />
-      <window_info anchor="right" id="Bean Validation" order="11" />
-      <window_info anchor="right" id="Key Promoter X" order="12" />
-      <window_info anchor="right" id="Maven Projects" order="13" visible="true" weight="0.27771854" />
-      <window_info anchor="right" id="JRebel Setup Guide" order="14" weight="0.32995737" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:F:/git/spring_cloud/ice-service" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_UNVERSIONED_FILES_WHILE_COMMIT" value="false" />
@@ -1007,7 +826,8 @@
     <MESSAGE value="zuul网关构建" />
     <MESSAGE value="seluth 分布式跟踪" />
     <MESSAGE value="添加 ice service" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加 ice service" />
+    <MESSAGE value="补充依赖" />
+    <option name="LAST_COMMIT_MESSAGE" value="补充依赖" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1015,467 +835,25 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/freemark-server/src/main/java/com/example/service/FreeMarkerService.java</url>
           <line>51</line>
-          <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-elasticsearch/3.1.6.RELEASE/spring-data-elasticsearch-3.1.6.RELEASE-sources.jar!/org/springframework/data/elasticsearch/repository/support/AbstractElasticsearchRepository.java</url>
           <line>174</line>
-          <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/elasticsearch-server/src/main/java/com/example/controller/GoodsController.java</url>
-          <line>41</line>
-          <properties />
+          <line>51</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/thread-server/src/main/java/com/example/suspend/demo1.java</url>
           <line>9</line>
-          <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/ThreadServerApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/thread/FirstThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/thread/MyThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-24">
-          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/test/java/com/example/myTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/config/IConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/java/com/example/util/JwtUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/java/com/example/util/JsonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/java/com/example/HiServiceApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/java/com/example/interceptor/AuthenticationInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/java/com/example/util/Cons.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sleuth-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sleuth-server/src/main/java/com/example/SleuthServerApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sleuth-server/src/main/java/com/example/controller/HiController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/main/java/com/example/controller/hiController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/src/test/java/com/example/HiServiceApplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sleuth-server/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elasticsearch-server/src/main/java/com/example/controller/GoodsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="226" column="80" selection-start-line="226" selection-start-column="71" selection-end-line="226" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo1/Run.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo2.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Thread.java" />
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/thread.md" />
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo2/MyThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/StackTrace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo2/Run.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/insecurity/demo1/Mythread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/Test1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="5" selection-start-line="24" selection-start-column="20" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/stack/DumpStack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/demo2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elasticsearch-server/mvnw.cmd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/MyThread3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/demo3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="37" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/interrupt/demo1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/suspend/MyThread1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thread-server/src/main/java/com/example/suspend/demo1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="23" column="56" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ice-service/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ice-service/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ice-service/src/main/java/com/example/entity/GoodEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ice-service/src/main/java/com/example/controller/HelloController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ice-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elasticsearch-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://MAVEN/com.example:eureka-server:0.0.1-SNAPSHOT">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>com.example:eureka-server:0.0.1-SNAPSHOT</OriginalElement>
-          <nodes>
-            <node x="0.0" y="0.0">com.example:eureka-server:0.0.1-SNAPSHOT</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="-408.13888888888874" y="-161.83333333333331" />
-          <SelectedNodes>
-            <node>com.example:eureka-server:0.0.1-SNAPSHOT</node>
-          </SelectedNodes>
-          <Categories />
-          <VISIBILITY>All</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ribbon-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="42" column="44" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hi-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/feige-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eureka-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="59" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="10" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zuul-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>scala-sdk-2.12.2</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>zuul-server</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
   <component name="mavenExecuteGoalHistory">
     <option value="" />

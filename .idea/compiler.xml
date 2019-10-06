@@ -7,32 +7,33 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="actuator-server" />
-        <module name="config-client" />
-        <module name="config-server" />
-        <module name="elasticsearch-server" />
-        <module name="eureka-server" />
-        <module name="feige-server" />
-        <module name="ferigin-server" />
-        <module name="freemark-server" />
-        <module name="hi-service" />
-        <module name="ice-service" />
-        <module name="jpush-server" />
-        <module name="kafka-server" />
-        <module name="quartz-server" />
-        <module name="rabbit-server" />
-        <module name="ribbon-service" />
-        <module name="security-server" />
-        <module name="shiro-service" />
-        <module name="sleuth-server" />
-        <module name="stream-service" />
-        <module name="stream1-service" />
-        <module name="stream2-service" />
-        <module name="thread-server" />
-        <module name="turbin-service" />
-        <module name="upload-service" />
-        <module name="zipkin-server" />
         <module name="zuul-server" />
+        <module name="elasticsearch-server" />
+        <module name="config-server" />
+        <module name="config-client" />
+        <module name="hi-service" />
+        <module name="jpush-server" />
+        <module name="shiro-service" />
+        <module name="ferigin-server" />
+        <module name="turbin-service" />
+        <module name="quartz-server" />
+        <module name="stream-service" />
+        <module name="actuator-server" />
+        <module name="kafka-server" />
+        <module name="freemark-server" />
+        <module name="stream2-service" />
+        <module name="appframework" />
+        <module name="feige-server" />
+        <module name="zipkin-server" />
+        <module name="ribbon-service" />
+        <module name="upload-service" />
+        <module name="rabbit-server" />
+        <module name="security-server" />
+        <module name="ice-service" />
+        <module name="thread-server" />
+        <module name="stream1-service" />
+        <module name="sleuth-server" />
+        <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -44,34 +45,34 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="actuator-server" options="" />
+      <module name="actuator-server" options="-parameters" />
       <module name="alipay-server" options="-parameters" />
-      <module name="config-client" options="" />
-      <module name="config-server" options="" />
-      <module name="elasticsearch-server" options="" />
-      <module name="eureka-server" options="" />
-      <module name="feige-server" options="" />
+      <module name="config-client" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="elasticsearch-server" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="feige-server" options="-parameters" />
       <module name="ferigin-server" options="-parameters" />
-      <module name="freemark-server" options="" />
-      <module name="hi-service" options="" />
-      <module name="ice-service" options="" />
-      <module name="jpush-server" options="" />
+      <module name="freemark-server" options="-parameters" />
+      <module name="hi-service" options="-parameters" />
+      <module name="ice-service" options="-parameters" />
+      <module name="jpush-server" options="-parameters" />
       <module name="kafka" options="-parameters" />
-      <module name="kafka-server" options="" />
-      <module name="quartz-server" options="" />
-      <module name="rabbit-server" options="" />
-      <module name="ribbon-service" options="" />
-      <module name="security-server" options="" />
-      <module name="shiro-service" options="" />
-      <module name="sleuth-server" options="" />
-      <module name="stream-service" options="" />
-      <module name="stream1-service" options="" />
-      <module name="stream2-service" options="" />
-      <module name="thread-server" options="" />
-      <module name="turbin-service" options="" />
-      <module name="upload-service" options="" />
-      <module name="zipkin-server" options="" />
-      <module name="zuul-server" options="" />
+      <module name="kafka-server" options="-parameters" />
+      <module name="quartz-server" options="-parameters" />
+      <module name="rabbit-server" options="-parameters" />
+      <module name="ribbon-service" options="-parameters" />
+      <module name="security-server" options="-parameters" />
+      <module name="shiro-service" options="-parameters" />
+      <module name="sleuth-server" options="-parameters" />
+      <module name="stream-service" options="-parameters" />
+      <module name="stream1-service" options="-parameters" />
+      <module name="stream2-service" options="-parameters" />
+      <module name="thread-server" options="-parameters" />
+      <module name="turbin-service" options="-parameters" />
+      <module name="upload-service" options="-parameters" />
+      <module name="zipkin-server" options="-parameters" />
+      <module name="zuul-server" options="-parameters" />
     </option>
   </component>
 </project>
