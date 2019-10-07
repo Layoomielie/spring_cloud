@@ -7,33 +7,33 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zuul-server" />
+        <module name="eureka-server" />
         <module name="elasticsearch-server" />
         <module name="config-server" />
         <module name="config-client" />
+        <module name="stream1-service" />
         <module name="hi-service" />
         <module name="jpush-server" />
-        <module name="shiro-service" />
-        <module name="ferigin-server" />
+        <module name="upload-service" />
+        <module name="thread-server" />
         <module name="turbin-service" />
+        <module name="ice-service" />
         <module name="quartz-server" />
         <module name="stream-service" />
         <module name="actuator-server" />
-        <module name="kafka-server" />
+        <module name="zipkin-server" />
         <module name="freemark-server" />
         <module name="stream2-service" />
         <module name="appframework" />
-        <module name="feige-server" />
-        <module name="zipkin-server" />
+        <module name="ferigin-server" />
         <module name="ribbon-service" />
-        <module name="upload-service" />
+        <module name="zuul-server" />
         <module name="rabbit-server" />
         <module name="security-server" />
-        <module name="ice-service" />
-        <module name="thread-server" />
-        <module name="stream1-service" />
+        <module name="kafka-server" />
+        <module name="feige-server" />
+        <module name="shiro-service" />
         <module name="sleuth-server" />
-        <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

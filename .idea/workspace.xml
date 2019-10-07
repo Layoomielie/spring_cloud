@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e48c6876-8e62-49a7-9acf-6cdfcfa984dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -562,7 +561,7 @@
       <workItem from="1569090268374" duration="281000" />
       <workItem from="1569124615649" duration="2997000" />
       <workItem from="1570068382983" duration="1243000" />
-      <workItem from="1570330350642" duration="998000" />
+      <workItem from="1570330350642" duration="1849000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <created>1557493331106</created>
@@ -718,7 +717,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566111468347</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="补充依赖">
+      <created>1570366950918</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1570366950918</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TestHistory">
