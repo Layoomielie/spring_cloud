@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e48c6876-8e62-49a7-9acf-6cdfcfa984dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/thread-server/src/main/java/com/example/test/LockObj.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thread-server/src/main/java/com/example/test/deathLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ice-service/src/main/java/com/example/dao/MongoQueryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ice-service/src/main/java/com/example/dao/MongoQueryDao.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,13 +170,13 @@
     </option>
     <option name="contentProportion" value="0.1845238" />
   </component>
-  <component name="RunManager" selected="Spring Boot.IceServiceApplication">
-    <configuration name="demo1 (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.suspend.demo1" />
+  <component name="RunManager" selected="Application.LockObj">
+    <configuration name="LockObj" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.test.LockObj" />
       <module name="thread-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.suspend.*" />
+          <option name="PATTERN" value="com.example.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -180,12 +184,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="demo1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.interrupt.demo1" />
+    <configuration name="demo1 (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.suspend.demo1" />
       <module name="thread-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.interrupt.*" />
+          <option name="PATTERN" value="com.example.suspend.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -408,11 +412,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.demo1" />
       <item itemvalue="Application.demo2" />
       <item itemvalue="Application.demo3" />
       <item itemvalue="Application.demo1 (1)" />
       <item itemvalue="Application.main" />
+      <item itemvalue="Application.LockObj" />
       <item itemvalue="Spring Boot.ThreadServerApplication" />
       <item itemvalue="Spring Boot.IceServiceApplication" />
       <item itemvalue="Spring Boot.ElasticsearchServerApplication" />
@@ -441,11 +445,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LockObj" />
         <item itemvalue="Application.main" />
         <item itemvalue="Application.demo1 (1)" />
         <item itemvalue="Application.demo3" />
         <item itemvalue="Application.demo2" />
-        <item itemvalue="Application.demo1" />
       </list>
     </recent_temporary>
   </component>
@@ -562,6 +566,9 @@
       <workItem from="1569124615649" duration="2997000" />
       <workItem from="1570068382983" duration="1243000" />
       <workItem from="1570330350642" duration="1849000" />
+      <workItem from="1570410991635" duration="2450000" />
+      <workItem from="1570538332987" duration="1286000" />
+      <workItem from="1570629535219" duration="1229000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <created>1557493331106</created>
@@ -724,7 +731,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570366950918</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="a">
+      <created>1570411038364</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1570411038365</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -833,7 +847,8 @@
     <MESSAGE value="seluth 分布式跟踪" />
     <MESSAGE value="添加 ice service" />
     <MESSAGE value="补充依赖" />
-    <option name="LAST_COMMIT_MESSAGE" value="补充依赖" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
