@@ -20,6 +20,4 @@ public class MongoQueryDao {
         long count = mongoTemplate.count(query, PositionEntity.class);
         return new Long(count).intValue();
     }
-
-
 }
