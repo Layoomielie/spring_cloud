@@ -3,11 +3,21 @@ package com.example.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.dao.GoodsRepository;
 import com.example.entity.GoodsInfo;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.indices.template.GetTemplate;
+import io.searchbox.indices.template.PutTemplate;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateRequestBuilder;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.*;
+import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -20,11 +30,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.*;
+import org.springframework.data.querydsl.QuerydslUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -42,6 +54,10 @@ public class GoodsController {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @Autowired
+    private JestClient jestClient;
+
     Date date = new Date();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     String dates = dateFormat.format(date);
@@ -55,9 +71,16 @@ public class GoodsController {
         return "success";
     }
 
-    @GetMapping("saveOne")
-    public String saveOne(GoodsInfo goodsInfo) {
-        goodsRepository.save(goodsInfo);
+    @GetMapping("saveIndex")
+    public String saveAsIndex(String indexName) {
+        List<IndexQuery> list = new ArrayList<>();
+        for (int i = 0; i < 2000; i++) {
+            GoodsInfo goodsInfo = new GoodsInfo(i, "indexName:" + indexName + " 商品" + i, i, dates, "这是一个测试" + i + "商品");
+            IndexQuery indexQuery = new IndexQueryBuilder().withId(goodsInfo.getId() + "").withObject(goodsInfo).withIndexName(indexName).withType("doc").build();
+            list.add(indexQuery);
+        }
+        elasticsearchTemplate.bulkIndex(list);
+        elasticsearchTemplate.refresh(indexName);
         return "success";
     }
 
@@ -112,6 +135,210 @@ public class GoodsController {
         return list;
     }
 
+    @GetMapping("search/all")
+    public List<GoodsInfo> goodSearchAll(int page, int size) {
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        boolQueryBuilder.must(QueryBuilders.rangeQuery("id").lt(20));
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        PageRequest pageRequest = PageRequest.of(page, size);
+        FieldSortBuilder sort = SortBuilders.fieldSort("id");
+        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.withQuery(boolQueryBuilder).withSort(sort).withPageable(pageRequest).build();
+        List<GoodsInfo> goodsInfos = elasticsearchTemplate.queryForList(nativeSearchQuery, GoodsInfo.class);
+        System.out.println(goodsInfos.size());
+       /* SearchRequestBuilder searchRequestBuilder = elasticsearchTemplate.getClient().prepareSearch("goods-a").setQuery(boolQueryBuilder);
+        SearchResponse searchResponse = searchRequestBuilder.get();
+        SearchHit[] hits = searchResponse.getHits().getHits();
+        for (SearchHit hit : hits) {
+            String index = hit.getIndex();
+            System.out.println(index);
+        }*/
+        return goodsInfos;
+    }
+
+    @GetMapping("update/index")
+    public int goodsUpdateQuery(String id) throws IOException {
+        UpdateRequest updateRequest = new UpdateRequest();
+        updateRequest.index("goods-a");
+        updateRequest.type("doc");
+        updateRequest.id(id);
+        updateRequest.doc(XContentFactory.jsonBuilder().startObject().field("detail", "222222").endObject());
+        UpdateResponse updateResponse = elasticsearchTemplate.getClient().update(updateRequest).actionGet();
+        RestStatus status = updateResponse.status();
+        return status.getStatus();
+    }
+
+    @GetMapping("template/add")
+    public void templateAdd() throws IOException {
+        String source;
+        XContentBuilder mapBuilder = null;
+        String A="{\n" +
+                "    \"order\" : 0,\n" +
+                "    \"version\" : 60001,\n" +
+                "    \"index_patterns\" : [\n" +
+                "      \"A\"\n" +
+                "    ],\n" +
+                "    \"settings\" : {\n" +
+                "      \"index\" : {\n" +
+                "        \"number_of_shards\" : \"5\",\n" +
+                "        \"number_of_replicas\" : \"1\",\n" +
+                "        \"refresh_interval\" : \"3s\"\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"mappings\" : {\n" +
+                "      \"doc\" : {\n" +
+                "        \"dynamic_templates\" : [\n" +
+                "          {\n" +
+                "            \"message_field\" : {\n" +
+                "              \"path_match\" : \"message\",\n" +
+                "              \"match_mapping_type\" : \"string\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"text\",\n" +
+                "                \"norms\" : false\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"tbName_fields\" : {\n" +
+                "              \"match\" : \"tbName\",\n" +
+                "              \"match_mapping_type\" : \"string\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"keyword\",\n" +
+                "                \"norms\" : false\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"timestamp_fields\" : {\n" +
+                "              \"match\" : \"timestamp\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"date\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"time_fields\" : {\n" +
+                "              \"match\" : \"time\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"date\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"createTime_fields\" : {\n" +
+                "              \"match\" : \"createTime\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"date\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"datestamp_fields\" : {\n" +
+                "              \"match\" : \"date\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"date\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"date_fields\" : {\n" +
+                "              \"match\" : \"*Date\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"date\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"time_fields\" : {\n" +
+                "              \"match\" : \"*Time\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"date\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"integer_fields\" : {\n" +
+                "              \"match_mapping_type\" : \"long\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"long\",\n" +
+                "                \"norms\" : false\n" +
+                "              }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"string_fields\" : {\n" +
+                "              \"match\" : \"*\",\n" +
+                "              \"match_mapping_type\" : \"string\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"keyword\",\n" +
+                "                \"ignore_above\" : 1000,\n" +
+                "                \"norms\" : false\n" +
+                "              }\n" +
+                "            }\n" +
+                "          }\n" +
+                "        ],\n" +
+                "        \"properties\" : {\n" +
+                "          \"geoip\" : {\n" +
+                "            \"dynamic\" : true,\n" +
+                "            \"properties\" : {\n" +
+                "              \"ip\" : {\n" +
+                "                \"type\" : \"ip\"\n" +
+                "              },\n" +
+                "              \"location\" : {\n" +
+                "                \"type\" : \"geo_point\"\n" +
+                "              },\n" +
+                "              \"latitude\" : {\n" +
+                "                \"type\" : \"half_float\"\n" +
+                "              },\n" +
+                "              \"longitude\" : {\n" +
+                "                \"type\" : \"half_float\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          }\n" +
+                "        }\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"aliases\" : { }\n" +
+                "  }";
+        try {
+            mapBuilder = XContentFactory.jsonBuilder();
+            mapBuilder.startObject().field("template", "df_returnreport*").field("order", 1)//
+                    .startObject("settings").field("number_of_shards", 5)//五个分片
+                    .startObject("index").field("max_result_window", "1000000")//一次查询最大一百万
+                    .endObject()//
+                    .endObject()//
+                    .startObject("mappings")//
+
+                    .startObject("df_returnreport")//type名
+                    .startObject("properties")//
+                    .startObject("id").field("type", "long").endObject()//
+                    .startObject("username").field("type", "keyword").endObject()//
+                    .startObject("content").field("type", "text").field("analyzer", "ik_max_word").endObject()//
+                    .startObject("returntime").field("type", "date").field("format", "yyyy-MM-dd HH:mm:ss").endObject()//
+                    .startObject("gateway").field("type", "integer").endObject()//
+                    .endObject()//
+                    .endObject()//
+
+                    .endObject()//
+                    .startObject("aliases").startObject("df_returnreport").endObject().endObject()//别名
+                    .endObject();//
+            source = mapBuilder.getOutputStream().toString();
+            JestResult jestResult = jestClient.execute(new PutTemplate.Builder("my_returnreport", A).build());
+            System.out.println("result:" + jestResult.getJsonString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @GetMapping("template/get")
+    public void getTemplate(String template) {
+        try {
+            JestResult jestResult = jestClient.execute(new GetTemplate.Builder(template).build());
+            System.out.println("result:" + jestResult.getJsonString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @GetMapping("search/page")
     public List<GoodsInfo> goodSearchPage(Integer page, Integer size, String q) {
         size = 1;
@@ -148,9 +375,10 @@ public class GoodsController {
             }
         }
         long endTime = System.currentTimeMillis();
-        System.out.println(endTime-startTime);
+        System.out.println(endTime - startTime);
         return sortValue;
     }
+
     @GetMapping("search/entity")
     public Object goodSearchEntity() {
         long startTime = System.currentTimeMillis();
@@ -165,7 +393,7 @@ public class GoodsController {
             System.out.println(goodsInfo);
         });
         long endTime = System.currentTimeMillis();
-        System.out.println(endTime-startTime);
+        System.out.println(endTime - startTime);
         return null;
     }
 

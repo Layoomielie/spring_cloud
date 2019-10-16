@@ -13,10 +13,10 @@ import java.io.Serializable;
  * @Description
  */
 
-@Document(indexName = "good*",type = "doc")
-//@Mapping(mappingPath = "goods.json")
-public class GoodsInfo implements Serializable {
-    @Id
+    @Document(indexName = "goods-*",type = "doc")
+    //@Mapping(mappingPath = "goods.json")
+    public class GoodsInfo implements Serializable {
+        @Id
     @Field(type = FieldType.Integer)
     private Integer id;
 

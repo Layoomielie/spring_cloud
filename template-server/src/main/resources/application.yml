@@ -1,0 +1,16 @@
+server:
+  port: 8867
+spring:
+  application:
+    name: elasticsearch-server
+  data:
+    elasticsearch:
+      cluster-nodes: 10.100.23.92:9300,10.100.23.91:9300,10.100.23.93:9300
+      cluster-name: es_cluster
+  elasticsearch:
+    jest:
+      uris: http://10.100.23.92:9200
+management:
+  health:
+    elasticsearch:
+      enabled: false
