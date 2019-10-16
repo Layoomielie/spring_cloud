@@ -1,10 +1,13 @@
 package com.example.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.dao.GoodsRepository;
 import com.example.entity.GoodsInfo;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import io.searchbox.indices.template.GetTemplate;
 import io.searchbox.indices.template.PutTemplate;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -338,7 +341,31 @@ public class GoodsController {
         }
 
     }
+    @GetMapping("jest/get")
+    public void getJestSearch() {
+        try {
+            String A="{\n" +
+                    "  \"query\": {\n" +
+                    "    \"range\": {\n" +
+                    "      \"id\": {\n" +
+                    "        \"lte\": 10\n" +
+                    "      }\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}'";
+            Search build = new Search.Builder(A).addIndex("goods-a").build();
+            SearchResult jestResult = jestClient.execute(build);
+            System.out.println("result:" + jestResult.getJsonString());
+            List<SearchResult.Hit<JSONObject, Void>> hits = jestResult.getHits(JSONObject.class);
+            hits.forEach(hit->{
+                System.out.println(hit.index);
+                System.out.println(hit.source);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
     @GetMapping("search/page")
     public List<GoodsInfo> goodSearchPage(Integer page, Integer size, String q) {
         size = 1;
