@@ -1,5 +1,10 @@
 package com.example.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +12,10 @@ import java.util.Date;
  * qiancheng
  * @author 
  */
+@Document(indexName = "qiancheng", type = "doc")
 public class Qiancheng implements Serializable {
+    @Id
+    @Field(type = FieldType.Integer)
     private Integer id;
 
     private String position;

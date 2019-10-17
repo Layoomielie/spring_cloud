@@ -13,10 +13,10 @@ import java.io.Serializable;
  * @Description
  */
 
-    @Document(indexName = "goods-*",type = "doc")
-    //@Mapping(mappingPath = "goods.json")
-    public class GoodsInfo implements Serializable {
-        @Id
+@Document(indexName = "goods-*", type = "doc")
+//@Mapping(mappingPath = "goods.json")
+public class GoodsInfo implements Serializable {
+    @Id
     @Field(type = FieldType.Integer)
     private Integer id;
 
@@ -24,9 +24,9 @@ import java.io.Serializable;
     @Field(ignoreFields = "name")
     private String name;
     private Integer price;
-    
+
     private String time;
-    @Field(ignoreFields = {"description"},type = FieldType.Keyword,store = false,index = false)
+    @Field(ignoreFields = {"description"}, type = FieldType.Keyword, store = false, index = false)
     private String description;
 
     public GoodsInfo(Integer id, String name, Integer price, String time, String description) {

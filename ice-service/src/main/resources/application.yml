@@ -4,11 +4,22 @@ server:
     enabled: false
 
 spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 139.224.233.92:9300
+      cluster-name: docker-cluster
   datasource:
     username: root
     password: Sink44253432
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-uf6h10w84d8f1wy4p7o.mysql.rds.aliyuncs.com:3306/scrapy?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+  elasticsearch:
+    jest:
+      uris: http://10.100.23.92:9200
 management:
   security:
     enabled: false
+  health:
+    elasticsearch:
+      enabled: false
+
