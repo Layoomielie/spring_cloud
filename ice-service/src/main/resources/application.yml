@@ -1,13 +1,14 @@
 server:
-  port: 12000
-  max-http-header-size: 8192
-spring:
-  data:
-    mongodb:
-      database: local
-      password: 44253432
-      host: 47.101.171.168
-  redis:
-    host: 139.224.233.92
-    port: 6379
+  port: 12001
+  compression:
+    enabled: false
 
+spring:
+  datasource:
+    username: root
+    password: Sink44253432
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-uf6h10w84d8f1wy4p7o.mysql.rds.aliyuncs.com:3306/scrapy?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+management:
+  security:
+    enabled: false

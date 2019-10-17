@@ -1,13 +1,11 @@
 package com.example.controller;
 
-import com.example.entity.PositionEntity;
-import com.example.repository.PositionRepository;
+import com.example.dao.QianchengDao;
+import com.example.entity.Qiancheng;
+import com.example.entity.QianchengExample;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,22 +18,19 @@ import java.util.List;
 @RestController
 public class QianchengController {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
-    @Autowired
-    private PositionRepository positionRepository;
-
+    @Autowired(required = true)
+    private QianchengDao qianchengDao;
 
     @CrossOrigin(origins = "*")
-    @RequestMapping("query")
-    public Object query(){
-        long count = positionRepository.count();
-        Query query = new Query(Criteria.where("city").is("西安"));
-        List<PositionEntity> list = mongoTemplate.find(query, PositionEntity.class);
-
-//        Query query = Query.query(Criteria.where("city").is("西安"));
-//        List<PositionEntity> list = mongoTemplate.find(query, PositionEntity.class);
-        return list;
+    @GetMapping("query/city")
+    public List<Qiancheng>  queryCity(String city,int page,int size){
+        QianchengExample qianchengExample = new QianchengExample();
+        QianchengExample.Criteria criteria = qianchengExample.createCriteria();
+        criteria.andCityEqualTo(city);
+        qianchengExample.setLimit(size);
+        qianchengExample.setOffset(new Long(page));
+        List<Qiancheng> qianchengs = qianchengDao.selectByExample(qianchengExample);
+        return qianchengs;
     }
  }
