@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @time：2019/9/23 17:24
  * @desc：
  **/
-@Configuration
+//@Configuration
 public class BaseConfig {
 
     /**
@@ -22,7 +22,7 @@ public class BaseConfig {
     * @Date: 2019/9/23
     * @Desc:   如果需要使用多个cache  需要在这里注册
     */
-    @Bean
+    //@Bean
     public CacheManager cacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("sampleCache"),new ConcurrentMapCache("sampleCache2")));

@@ -28,6 +28,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <version>2.1.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,11 +47,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.searchbox/jest -->
-        <dependency>
+        <!--<dependency>
             <groupId>io.searchbox</groupId>
             <artifactId>jest</artifactId>
             <version>6.3.1</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>

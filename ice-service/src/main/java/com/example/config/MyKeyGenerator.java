@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
  * @time：2019/9/23 17:32
  * @desc：
  **/
-@Component
 public class MyKeyGenerator implements KeyGenerator {
     @Override
     public Object generate(Object target, Method method, Object... params) {
