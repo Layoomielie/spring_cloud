@@ -37,8 +37,12 @@ public class ElasticsearchService {
     @Autowired
     QianchengRepository qianchengRepository;
 
-
-    public List<Qiancheng> getListByCity(String city, int page, int size) {
+    /**
+    * @Author: 张鸿建
+    * @Date: 2019/10/24
+    * @Desc: 通过city返回list
+    */
+    public List<Qiancheng> getListByCity(String city,int page,int size) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -49,7 +53,13 @@ public class ElasticsearchService {
         List<Qiancheng> qianchengs = elasticsearchTemplate.queryForList(nativeSearchQueryBuilder.build(), Qiancheng.class);
         return qianchengs;
     }
-
+    /**
+    * @param city
+    * @param term
+    * @Author: 张鸿建
+    * @Date: 2019/10/24
+    * @Desc: 对数字字段提供分析
+    */
     public Map<String, Integer> getStatByTerm(String city, String term) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         if (city != null) {
@@ -63,7 +73,13 @@ public class ElasticsearchService {
         });
         return hashMap;
     }
-
+    /**
+    * @param city
+    * @param term
+    * @Author: 张鸿建
+    * @Date: 2019/10/24
+    * @Desc: 
+    */
     public StatEntity getStatPriceByTerm(String city, String term) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         if (city != null) {

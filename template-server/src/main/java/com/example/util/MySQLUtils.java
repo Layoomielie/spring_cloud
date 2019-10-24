@@ -95,20 +95,31 @@ public class MySQLUtils {
                 "              }\n" +
                 "            }\n" +
                 "          }";
+        String textContent = ",{\n" +
+                "            \"${column_name}_fields\" : {\n" +
+                "              \"match\" : \"${column_name}\",\n" +
+                "              \"mapping\" : {\n" +
+                "                \"type\" : \"${data_type}\"\n" +
+                "                \"analyzer\" : \"ik_max_word\"\n" +
+                "              }\n" +
+                "            }\n" +
+                "          }";
         content = content.replace("${column_name}", column_name);
         switch (data_type) {
             case "varchar":
                 return content.replace("${data_type}", "keyword");
             case "text":
-                return content.replace("${data_type}", "text");
+                return textContent.replace("${data_type}", "text");
             case "int":
                 return content.replace("${data_type}", "long");
             case "datetime":
-                return content.replace("${data_type}", "time");
+                return content.replace("${data_type}", "date");
             case "float":
                 return content.replace("${data_type}", "float");
             case "timestamp":
-                return content.replace("${data_type}", "time");
+                return content.replace("${data_type}", "date");
+            case "double":
+                return content.replace("${data_type}", "double");
         }
         return null;
     }

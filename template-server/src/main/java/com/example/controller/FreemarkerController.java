@@ -32,11 +32,12 @@ public class FreemarkerController {
     @GetMapping("index/table")
     public void createTableTemplate(String tbName) {
         String mysqlHost="10.100.23.106";
-        String dbName="lano_gxcentro";
+        String dbName="lano_gxtkksxt";
         String userName="bin_log";
         String password="Js!jfh3#jsd8Gsp0";
         mySQLUtils.setParam(mysqlHost, dbName, userName, password);
         mySQLUtils.getConnect();
+
         try {
             mySQLUtils.queryAllTableInfo(tbName,dbName);
         } catch (SQLException e) {

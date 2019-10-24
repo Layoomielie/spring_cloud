@@ -381,6 +381,19 @@ public class GoodsController {
         return list;
     }
 
+    @GetMapping("query/page")
+    public List<GoodsInfo> goodQueryPage() {
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        boolQueryBuilder.must(QueryBuilders.rangeQuery("id").lt(20));
+        nativeSearchQueryBuilder.withQuery(boolQueryBuilder);
+        AggregatedPage<GoodsInfo> goodsInfos = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), GoodsInfo.class);
+        goodsInfos.forEach(goodsInfo -> {
+            System.out.println(goodsInfo.toString());
+        });
+        return null;
+    }
+
     @GetMapping("search/after")
     public Object goodSearchAfter(String... sortValues) {
         long startTime = System.currentTimeMillis();
