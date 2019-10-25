@@ -13,6 +13,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -22,8 +23,7 @@ import java.util.Map;
  * @time：2019/10/17 15:59
  * @desc：
  **/
-@Controller
-@RequestMapping("qiancheng")
+@RestController
 public class ElasticsearchController {
 
     @Autowired
@@ -32,6 +32,7 @@ public class ElasticsearchController {
     @GetMapping("/city/list")
     public List<Qiancheng> getListByCity(String city, int page, int size) {
         List<Qiancheng> list = elasticsearchService.getListByCity(city, page, size);
+        list.forEach(qiancheng -> System.out.println(qiancheng.toString()));
         return list;
     }
     @GetMapping("/stat/term")
