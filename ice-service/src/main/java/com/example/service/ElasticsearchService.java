@@ -1,10 +1,13 @@
 package com.example.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.dao.QianchengDao;
 import com.example.dao.QianchengRepository;
 import com.example.entity.Qiancheng;
 import com.example.entity.StatEntity;
 import com.example.exception.NotifyException;
+import com.example.util.DateStringUtil;
 import com.example.util.ElasticsearchUtil;
 import com.google.common.collect.Lists;
 import org.elasticsearch.ElasticsearchTimeoutException;
@@ -12,15 +15,21 @@ import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
 import org.elasticsearch.search.aggregations.bucket.range.DateRangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.range.RangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.Percentile;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanks;
+import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanksAggregationBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.Stats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -163,8 +172,8 @@ public class ElasticsearchService {
      * @Date: 2019/10/25
      * @Desc: 根据年限范围去获取文档数
      */
-    public Map<String, Integer> getDateRangeBucketByField(String city, int from, int to, String field) {
-        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+    public Map<String, Integer> getDateRangeBucketByField(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, int from, int to, String field) {
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
         if (city != null) {
             boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
         }
@@ -177,20 +186,20 @@ public class ElasticsearchService {
         });
         return hashMap;
     }
-    
+
     /**
-    * @param city
-    * @param region
-    * @param companyType
-    * @param cotype
-    * @param degree
-    * @param workyear
-    * @param companySize
-    * @param jobTerm
-    * @Author: 张鸿建
-    * @Date: 2019/10/25
-    * @Desc: 
-    */
+     * @param city
+     * @param region
+     * @param companyType
+     * @param cotype
+     * @param degree
+     * @param workyear
+     * @param companySize
+     * @param jobTerm
+     * @Author: 张鸿建
+     * @Date: 2019/10/25
+     * @Desc:
+     */
     public int getCountByQuery(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
@@ -199,12 +208,73 @@ public class ElasticsearchService {
         return new Long(count).intValue();
     }
 
-    public HashMap getCountByCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
-        BoolQueryBuilder nativeBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
-        DateHistogramInterval histogram;
+    /**
+     * @param city
+     * @param region
+     * @param companyType
+     * @param cotype
+     * @param degree
+     * @param workyear
+     * @param companySize
+     * @param jobTerm
+     * @Author: 张鸿建
+     * @Date: 2019/10/29
+     * @Desc:
+     */
+    public int getTodayCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+        boolQueryBuilder.must(QueryBuilders.rangeQuery("time").lte(DateStringUtil.getThisDay()).gte(DateStringUtil.getThisYestoday()));
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        NativeSearchQuery build = nativeSearchQueryBuilder.withQuery(boolQueryBuilder).build();
+        long count = elasticsearchTemplate.count(build, Qiancheng.class);
+        return new Long(count).intValue();
+    }
+
+    public Map getPercentilesRank(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] values) {
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+        PercentileRanksAggregationBuilder agg = AggregationBuilders.percentileRanks("agg", values).field(field);
+        PercentileRanks aggPercentilesResult = ElasticsearchUtil.getAggPercentilesResult(boolQueryBuilder, null, field, values, Qiancheng.class);
+        Map<Object, Object> hashMap = new HashMap<>();
+        for (double value : values) {
+            double percent = aggPercentilesResult.percent(value);
+            percent = (double) Math.round(percent * 100) / 100;
+            hashMap.put(value, percent);
+        }
+        return hashMap;
+    }
+
+    public JSONArray getBrokenLine(String dateType, String queryField) {
+        DateHistogramInterval dateHistogramInterval = getDateHistogramInterval(dateType);
+        DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram("agg").field(queryField).dateHistogramInterval(dateHistogramInterval);
+        TermsAggregationBuilder termsAggregationBuilder = AggregationBuilders.terms("agg").field("city");
+        MultiBucketsAggregation subAggDateHistogramResult = ElasticsearchUtil.getSubAggDateHistogramResult(dateHistogramAggregationBuilder, termsAggregationBuilder, Qiancheng.class);
+        JSONArray array = new JSONArray();
+        subAggDateHistogramResult.getBuckets().forEach(bucket -> {
+            String keyAsString = bucket.getKeyAsString();
+            String dateStr = keyAsString.split("T")[0];
+            if ("MONTH".equals(dateType)) {
+                dateStr = dateStr.substring(0, dateStr.length() - 3);
+            }else if("YEAR".equals(dateType)){
+                dateStr = dateStr.substring(0, dateStr.length() - 6);
+            }
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("queryDate", dateStr);
+            MultiBucketsAggregation aggregations = (MultiBucketsAggregation) bucket.getAggregations().get("agg");
+            aggregations.getBuckets().forEach(subBucket -> {
+                String city = subBucket.getKeyAsString();
+                long docCount = subBucket.getDocCount();
+                subJsonObject.put(city, new Long(docCount));
+            });
+            array.add(subJsonObject);
+        });
+        return array;
+    }
+
+    private DateHistogramInterval getDateHistogramInterval(String queryType) {
         if (queryType == null) {
             throw new NotifyException("query Type error");
         }
+        DateHistogramInterval histogram;
         switch (queryType) {
             case "SECOND":
                 histogram = DateHistogramInterval.SECOND;
@@ -233,11 +303,34 @@ public class ElasticsearchService {
             default:
                 throw new RuntimeException("时间类型解析错误");
         }
-        DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram(field).dateHistogramInterval(histogram);
-        Range range = ElasticsearchUtil.getAggDateHistogramResult(nativeBuilder, null, dateHistogramAggregationBuilder, Qiancheng.class);
+        return histogram;
+    }
+
+    /**
+     * @param city
+     * @param region
+     * @param companyType
+     * @param cotype
+     * @param degree
+     * @param workyear
+     * @param companySize
+     * @param jobTerm
+     * @param field
+     * @param queryType
+     * @Author: 张鸿建
+     * @Date: 2019/10/29
+     * @Desc:
+     */
+    public HashMap getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
+        BoolQueryBuilder nativeBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+
+        DateHistogramInterval histogram = getDateHistogramInterval(queryType);
+        DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram("agg").dateHistogramInterval(histogram).field(field);
+        MultiBucketsAggregation range = ElasticsearchUtil.getAggDateHistogramResult(nativeBuilder, null, dateHistogramAggregationBuilder, Qiancheng.class);
         HashMap<String, Integer> hashMap = new HashMap<>();
         range.getBuckets().forEach(bucket -> {
-            hashMap.put(bucket.getKeyAsString(), new Long(bucket.getDocCount()).intValue());
+            String dateStr = formatDate(bucket.getKeyAsString());
+            hashMap.put(dateStr, new Long(bucket.getDocCount()).intValue());
         });
         return hashMap;
     }
@@ -270,5 +363,14 @@ public class ElasticsearchService {
         }
 
         return boolQueryBuilder;
+    }
+
+    private String formatDate(String dateStr) {
+        if (dateStr.contains("T")) {
+            String[] ts = dateStr.split("T");
+            return ts[0];
+        } else {
+            return dateStr;
+        }
     }
 }

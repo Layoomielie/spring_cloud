@@ -33,7 +33,8 @@ public class Qiancheng implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date date;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date time;
 
     private Double maxPrice;
