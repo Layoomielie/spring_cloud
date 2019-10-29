@@ -77,20 +77,21 @@ public class ElasticsearchService {
      * @param term
      * @Author: 张鸿建
      * @Date: 2019/10/24
-     * @Desc: 对数字字段提供分析
+     * @Desc:
      */
-    public Map<String, Integer> getStatByTerm(String city, String term) {
+    public JSONObject getStatByTerm(String city, String term) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         if (city != null) {
             boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
         }
         Terms terms = ElasticsearchUtil.getAggTermsResult(boolQueryBuilder, null, term, null, 10, Qiancheng.class);
         List<? extends Terms.Bucket> buckets = terms.getBuckets();
+        JSONObject jsonObject = new JSONObject();
         Map<String, Integer> hashMap = new HashMap();
         buckets.forEach(bucket -> {
-            hashMap.put(bucket.getKeyAsString(), new Long(bucket.getDocCount()).intValue());
+            jsonObject.put(bucket.getKeyAsString(), new Long(bucket.getDocCount()).intValue());
         });
-        return hashMap;
+        return jsonObject;
     }
 
     /**
@@ -100,11 +101,8 @@ public class ElasticsearchService {
      * @Date: 2019/10/24
      * @Desc:
      */
-    public StatEntity getStatPriceByTerm(String city, String term) {
-        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
-        if (city != null) {
-            boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
-        }
+    public StatEntity getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
+       BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
         Stats stat = ElasticsearchUtil.getAggStatResult(boolQueryBuilder, null, term, Qiancheng.class);
         StatEntity statEntity = new StatEntity();
         statEntity.setAvg(stat.getAvg());
@@ -122,12 +120,12 @@ public class ElasticsearchService {
      * @Date: 2019/10/25
      * @Desc: 获取比当前值小的在文档中所占百分比
      */
-    public List<Percentile> getPercenRankByPrice(String city, double[] valus) {
-        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+    public List<Percentile> getPercenRankByPrice(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] valus) {
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
         if (city != null) {
             boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
         }
-        PercentileRanks ranks = ElasticsearchUtil.getAggPercentilesResult(boolQueryBuilder, null, "price", valus, Qiancheng.class);
+        PercentileRanks ranks = ElasticsearchUtil.getAggPercentilesResult(boolQueryBuilder, null, field, valus, Qiancheng.class);
         Iterator<Percentile> iterator = ranks.iterator();
         List<Percentile> percentiles = Lists.newArrayList(iterator);
         return percentiles;

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.entity.Qiancheng;
 import com.example.entity.StatEntity;
 import com.example.service.ElasticsearchService;
@@ -39,20 +40,20 @@ public class ElasticsearchController {
     }
 
     @GetMapping("/stat/term")
-    public Map<String, Integer> getStatByTerm(String city, String term) {
-        Map<String, Integer> statByTerm = elasticsearchService.getStatByTerm(city, term);
+    public JSONObject getStatByTerm(String city, String term) {
+        JSONObject statByTerm = elasticsearchService.getStatByTerm(city, term);
         return statByTerm;
     }
 
     @GetMapping("/city/term")
-    public StatEntity getStatPriceByTerm(String city, String term) {
-        StatEntity statEntity = elasticsearchService.getStatPriceByTerm(city, term);
+    public StatEntity getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
+        StatEntity statEntity = elasticsearchService.getStatPriceByTerm(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, term);
         return statEntity;
     }
 
     @GetMapping("/percen/price")
-    public List<Percentile> getPercenRankByPrice(String city, double[] valus) {
-        List<Percentile> percenRankByPrice = elasticsearchService.getPercenRankByPrice(city, valus);
+    public List<Percentile> getPercenRankByPrice(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] valus) {
+        List<Percentile> percenRankByPrice = elasticsearchService.getPercenRankByPrice(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, field, valus);
         return percenRankByPrice;
     }
 
@@ -87,8 +88,8 @@ public class ElasticsearchController {
     }
 
     @GetMapping("/all/city")
-    public JSONArray getBrokenLine(String DateType,String queryField) {
-        JSONArray brokenLine = elasticsearchService.getBrokenLine(DateType,queryField);
+    public JSONArray getBrokenLine(String DateType, String queryField) {
+        JSONArray brokenLine = elasticsearchService.getBrokenLine(DateType, queryField);
         return brokenLine;
     }
 }
