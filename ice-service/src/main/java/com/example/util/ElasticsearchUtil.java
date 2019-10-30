@@ -16,6 +16,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.BucketOrder;
+import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
 import org.elasticsearch.search.aggregations.bucket.filter.Filter;
 import org.elasticsearch.search.aggregations.bucket.filter.FilterAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.filter.FiltersAggregationBuilder;
@@ -52,11 +53,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
-*
-* @Author: 张鸿建
-* @Date: 2019/9/5
-* @Desc: 
-*/
+ * @Author: 张鸿建
+ * @Date: 2019/9/5
+ * @Desc:
+ */
 @Component
 public class ElasticsearchUtil {
 
@@ -73,6 +73,7 @@ public class ElasticsearchUtil {
         elasticsearchUtil = this;
         elasticsearchUtil.elasticsearchTemplate = this.elasticsearchTemplate;
     }
+
     /**
      * @param queryBuilder
      * @param sortBuilder
@@ -179,6 +180,18 @@ public class ElasticsearchUtil {
     }
 
 
+    public static <T> MultiBucketsAggregation getSubAggDateHistogramResult(DateHistogramAggregationBuilder dateAggregationBuilder, TermsAggregationBuilder termsAggregationBuilder, Class<T> clazz) {
+        SearchRequestBuilder searchRequestsBuilder = getSearchRequestsBuilder(null, null, clazz);
+        DateHistogramAggregationBuilder dateHistogramAggregationBuilder = dateAggregationBuilder.subAggregation(termsAggregationBuilder);
+        Aggregation aggregation = searchRequestsBuilder.setSize(0).addAggregation(dateHistogramAggregationBuilder).execute().actionGet().getAggregations().get("agg");
+        if (aggregation instanceof MultiBucketsAggregation) {
+            MultiBucketsAggregation range = (MultiBucketsAggregation) aggregation;
+            return range;
+        } else {
+            throw new NotifyException("getAggFilterResult error");
+        }
+    }
+
     /**
      * @param queryBuilder
      * @param sortBuilder
@@ -188,12 +201,12 @@ public class ElasticsearchUtil {
      * @Date: 2019/9/5
      * @Desc:
      */
-    public static <T> Range getAggDateHistogramResult(QueryBuilder queryBuilder, SortBuilder sortBuilder, DateHistogramAggregationBuilder dateAggregationBuilder, Class<T> clazz) {
+    public static <T> MultiBucketsAggregation getAggDateHistogramResult(QueryBuilder queryBuilder, SortBuilder sortBuilder, DateHistogramAggregationBuilder dateAggregationBuilder, Class<T> clazz) {
         SearchRequestBuilder searchRequestsBuilder = getSearchRequestsBuilder(queryBuilder, sortBuilder, clazz);
         Aggregation aggregation = searchRequestsBuilder.setSize(0).addAggregation(dateAggregationBuilder).execute().actionGet().getAggregations().get("agg");
 
-        if (aggregation instanceof Range) {
-            Range range = (Range) aggregation;
+        if (aggregation instanceof MultiBucketsAggregation) {
+            MultiBucketsAggregation range = (MultiBucketsAggregation) aggregation;
             return range;
         } else {
             throw new NotifyException("getAggFilterResult error");
@@ -296,7 +309,8 @@ public class ElasticsearchUtil {
      */
     public static <T> Terms getAggTermsResult(QueryBuilder queryBuilder, SortBuilder sortBuilder, String field, BucketOrder bucketOrder, Integer size, Class<T> clazz) {
         SearchRequestBuilder searchRequestsBuilder = getSearchRequestsBuilder(queryBuilder, sortBuilder, clazz);
-        TermsAggregationBuilder aggregationBuilder = AggregationBuilders.terms("agg").field(field);
+        TermsAggregationBuilder aggregationBuilder = AggregationBuilders.terms("agg").field(field).order(BucketOrder.count(false));
+
         if (null != size && size > 0) {
             aggregationBuilder.size(size);
         } else {
@@ -489,6 +503,7 @@ public class ElasticsearchUtil {
             throw new NotifyException("getAggStatResult error");
         }
     }
+
 
     /**
      * @param queryBuilder

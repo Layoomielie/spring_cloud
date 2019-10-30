@@ -1,5 +1,7 @@
 server:
   port: 12000
+  compression:
+    enabled: false
 
 spring:
   data:
@@ -11,7 +13,6 @@ spring:
     password: Sink44253432
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-uf6h10w84d8f1wy4p7o.mysql.rds.aliyuncs.com:3306/scrapy?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-
 management:
   security:
     enabled: false
