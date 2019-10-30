@@ -18,6 +18,7 @@ public class MySQLUtils {
     FreemarkerTest freemarkerTest;
 
     String mysqlHost, dbname, username, password;
+    private int saveflag;
     Connection conn = null;
 
     /*public MySQLUtils(String mysqlHost, String dbname, String username, String password) {
@@ -27,11 +28,12 @@ public class MySQLUtils {
         this.password = password;
     }*/
 
-    public void setParam(String mysqlHost, String dbname, String username, String password) {
+    public void setParam(String mysqlHost, String dbname, String username, String password, int saveflag) {
         this.mysqlHost = mysqlHost;
         this.dbname = dbname;
         this.username = username;
         this.password = password;
+        this.saveflag = saveflag;
     }
 
     public void getConnect() {
@@ -64,26 +66,36 @@ public class MySQLUtils {
         while (rstable.next()) {
             String column_name = rstable.getString("column_name");
             String data_type = rstable.getString("data_type");
-            column_name = column_name.toLowerCase();
-            String[] str = column_name.split("_");
-            StringBuffer buffer = new StringBuffer();
-            String newStr = "";
-            for (int i = 1; i < str.length; i++) {
-                if (i == 1) {
-                    newStr = str[i];
-                } else {
-                    newStr = str[i].substring(0, 1).toUpperCase() + str[i].substring(1);
+            String part = "";
+            if (saveflag == 1) {
+                column_name = column_name.toLowerCase();
+                String[] str = column_name.split("_");
+                StringBuffer buffer = new StringBuffer();
+                String newStr = "";
+                for (int i = 1; i < str.length; i++) {
+                    if (i == 1) {
+                        newStr = str[i];
+                    } else {
+                        newStr = str[i].substring(0, 1).toUpperCase() + str[i].substring(1);
+                    }
+                    buffer.append(newStr);
                 }
-                buffer.append(newStr);
+                part = select_data_type(buffer.toString(), data_type);
+            } else {
+                part=select_data_type(column_name, data_type);
             }
-            String part = select_data_type(buffer.toString(), data_type);
             if (flag == 0) {
                 part = part.replace(",{", "{");
             }
             data_type_content.append(part);
             flag++;
         }
-        freemarkerTest.createTemplateFile(tbName.substring(2) + "-*", data_type_content.toString(), dbname);
+        if(saveflag==1){
+            freemarkerTest.createTemplateFile(tbName.substring(2) + "-*", data_type_content.toString(), dbname);
+        }else {
+            freemarkerTest.createTemplateFile(tbName + "-*", data_type_content.toString(), dbname);
+        }
+
     }
 
     public String select_data_type(String column_name, String data_type) {
@@ -99,16 +111,19 @@ public class MySQLUtils {
                 "            \"${column_name}_fields\" : {\n" +
                 "              \"match\" : \"${column_name}\",\n" +
                 "              \"mapping\" : {\n" +
-                "                \"type\" : \"${data_type}\"\n" +
+                "                \"type\" : \"${data_type}\",\n" +
                 "                \"analyzer\" : \"ik_max_word\"\n" +
                 "              }\n" +
                 "            }\n" +
                 "          }";
         content = content.replace("${column_name}", column_name);
+        textContent = textContent.replace("${column_name}", column_name);
         switch (data_type) {
             case "varchar":
                 return content.replace("${data_type}", "keyword");
             case "text":
+                return textContent.replace("${data_type}", "text");
+            case "longtext":
                 return textContent.replace("${data_type}", "text");
             case "int":
                 return content.replace("${data_type}", "long");
@@ -121,7 +136,7 @@ public class MySQLUtils {
             case "double":
                 return content.replace("${data_type}", "double");
         }
-        return null;
+        return "";
     }
 
     public static void main(String[] args) throws SQLException {

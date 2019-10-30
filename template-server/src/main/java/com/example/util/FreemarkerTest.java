@@ -43,7 +43,7 @@ public class FreemarkerTest {
     public String createTemplateFile(String patterns, String data_type_content, String dbName) {
         //给定xml文件输出路径
         Writer writer = null;
-        String path = "E:/" + dbName + "/";
+        String path = "E:/test/" + dbName + "/";
         String tbName = patterns.replace("-*", "");
         try {
             StringWriter stringWriter = new StringWriter();

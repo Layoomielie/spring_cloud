@@ -309,7 +309,8 @@ public class ElasticsearchUtil {
      */
     public static <T> Terms getAggTermsResult(QueryBuilder queryBuilder, SortBuilder sortBuilder, String field, BucketOrder bucketOrder, Integer size, Class<T> clazz) {
         SearchRequestBuilder searchRequestsBuilder = getSearchRequestsBuilder(queryBuilder, sortBuilder, clazz);
-        TermsAggregationBuilder aggregationBuilder = AggregationBuilders.terms("agg").field(field);
+        TermsAggregationBuilder aggregationBuilder = AggregationBuilders.terms("agg").field(field).order(BucketOrder.count(false));
+
         if (null != size && size > 0) {
             aggregationBuilder.size(size);
         } else {
