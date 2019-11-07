@@ -77,21 +77,24 @@ public class ElasticsearchService {
      * @param term
      * @Author: 张鸿建
      * @Date: 2019/10/24
-     * @Desc:
+     * @Desc: 返回饼图数据
      */
-    public JSONObject getStatByTerm(String city, String term) {
+    public JSONArray getStatByTerm(String city, String term) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         if (city != null) {
             boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
         }
         Terms terms = ElasticsearchUtil.getAggTermsResult(boolQueryBuilder, null, term, null, 10, Qiancheng.class);
         List<? extends Terms.Bucket> buckets = terms.getBuckets();
-        JSONObject jsonObject = new JSONObject();
+        JSONArray array = new JSONArray();
         Map<String, Integer> hashMap = new HashMap();
         buckets.forEach(bucket -> {
-            jsonObject.put(bucket.getKeyAsString(), new Long(bucket.getDocCount()).intValue());
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("city",bucket.getKeyAsString());
+            jsonObject.put("count",new Long(bucket.getDocCount()).intValue());
+            array.add(jsonObject);
         });
-        return jsonObject;
+        return array;
     }
 
     /**
@@ -102,7 +105,7 @@ public class ElasticsearchService {
      * @Desc:
      */
     public StatEntity getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
-       BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
         Stats stat = ElasticsearchUtil.getAggStatResult(boolQueryBuilder, null, term, Qiancheng.class);
         StatEntity statEntity = new StatEntity();
         statEntity.setAvg(stat.getAvg());
@@ -252,7 +255,7 @@ public class ElasticsearchService {
             String dateStr = keyAsString.split("T")[0];
             if ("MONTH".equals(dateType)) {
                 dateStr = dateStr.substring(0, dateStr.length() - 3);
-            }else if("YEAR".equals(dateType)){
+            } else if ("YEAR".equals(dateType)) {
                 dateStr = dateStr.substring(0, dateStr.length() - 6);
             }
             JSONObject subJsonObject = new JSONObject();
@@ -319,18 +322,25 @@ public class ElasticsearchService {
      * @Date: 2019/10/29
      * @Desc:
      */
-    public HashMap getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
+    public JSONArray getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
         BoolQueryBuilder nativeBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
 
         DateHistogramInterval histogram = getDateHistogramInterval(queryType);
         DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram("agg").dateHistogramInterval(histogram).field(field);
         MultiBucketsAggregation range = ElasticsearchUtil.getAggDateHistogramResult(nativeBuilder, null, dateHistogramAggregationBuilder, Qiancheng.class);
-        HashMap<String, Integer> hashMap = new HashMap<>();
+
+        JSONArray array = new JSONArray();
         range.getBuckets().forEach(bucket -> {
-            String dateStr = formatDate(bucket.getKeyAsString());
-            hashMap.put(dateStr, new Long(bucket.getDocCount()).intValue());
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("date",formatDate(bucket.getKeyAsString()));
+            if("date".equals(field)){
+                jsonObject.put("发布招聘数量", new Long(bucket.getDocCount()).intValue());
+            }else {
+                jsonObject.put("爬取数据量", new Long(bucket.getDocCount()).intValue());
+            }
+            array.add(jsonObject);
         });
-        return hashMap;
+        return array;
     }
 
     private BoolQueryBuilder getNativeBuilder(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {

@@ -40,11 +40,16 @@ public class FreemarkerTest {
         }
     }
 
-    public String createTemplateFile(String patterns, String data_type_content, String dbName) {
+    public String createTemplateFile(String patterns, String data_type_content, String dbName,int flag) {
         //给定xml文件输出路径
         Writer writer = null;
         String path = "E:/test/" + dbName + "/";
         String tbName = patterns.replace("-*", "");
+        if(flag!=1){
+            patterns=tbName+"-*";
+        }else {
+            patterns=tbName+"*";
+        }
         try {
             StringWriter stringWriter = new StringWriter();
             File file = new File(path);
@@ -54,7 +59,7 @@ public class FreemarkerTest {
             writer = new FileWriter(path + tbName + ".txt");
             //按照用法，来个map集合
             Map<String, String> map = new HashMap<String, String>();
-            map.put("patterns", tbName);
+            map.put("patterns", patterns);
             map.put("data_type_content", data_type_content);
             //调用process方法
             template.process(map, writer);

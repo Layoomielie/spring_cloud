@@ -39,13 +39,13 @@ public class ElasticsearchController {
         return list;
     }
 
-    @GetMapping("/stat/term")
-    public JSONObject getStatByTerm(String city, String term) {
-        JSONObject statByTerm = elasticsearchService.getStatByTerm(city, term);
+    @GetMapping("/city/term")
+    public JSONArray getStatByTerm(String city, String term) {
+        JSONArray statByTerm = elasticsearchService.getStatByTerm(city, term);
         return statByTerm;
     }
 
-    @GetMapping("/city/term")
+    @GetMapping("/stat/term")
     public StatEntity getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
         StatEntity statEntity = elasticsearchService.getStatPriceByTerm(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, term);
         return statEntity;
@@ -58,9 +58,9 @@ public class ElasticsearchController {
     }
 
     @GetMapping("/count/histogram")
-    public HashMap getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
-        HashMap map = elasticsearchService.getCountByHistogram(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, field, queryType);
-        return map;
+    public JSONArray getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
+        JSONArray array = elasticsearchService.getCountByHistogram(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, field, queryType);
+        return array;
     }
 
     @GetMapping("/date/rank")
