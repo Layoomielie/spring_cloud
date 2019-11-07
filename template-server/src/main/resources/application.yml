@@ -5,11 +5,11 @@ spring:
     name: elasticsearch-server
   data:
     elasticsearch:
-      cluster-nodes: 10.100.23.92:9300,10.100.23.91:9300,10.100.23.93:9300
-      cluster-name: es_cluster
+      cluster-nodes: 139.224.233.92:9300
+      cluster-name: docker-cluster
   elasticsearch:
     jest:
-      uris: http://10.100.23.92:9200
+      uris: http://139.224.233.92:9200
 management:
   health:
     elasticsearch:

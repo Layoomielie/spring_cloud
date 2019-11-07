@@ -91,9 +91,9 @@ public class MySQLUtils {
             flag++;
         }
         if(saveflag==1){
-            freemarkerTest.createTemplateFile(tbName.substring(2) + "-*", data_type_content.toString(), dbname);
+            freemarkerTest.createTemplateFile(tbName.substring(2) + "-*", data_type_content.toString(), dbname,saveflag);
         }else {
-            freemarkerTest.createTemplateFile(tbName + "-*", data_type_content.toString(), dbname);
+            freemarkerTest.createTemplateFile(tbName + "-*", data_type_content.toString(), dbname,saveflag);
         }
 
     }
