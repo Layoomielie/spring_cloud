@@ -21,6 +21,8 @@ import org.elasticsearch.search.aggregations.bucket.filter.Filter;
 import org.elasticsearch.search.aggregations.bucket.filter.FilterAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.filter.FiltersAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.missing.Missing;
+import org.elasticsearch.search.aggregations.bucket.missing.MissingAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.DateRangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.range.RangeAggregationBuilder;
@@ -503,7 +505,26 @@ public class ElasticsearchUtil {
             throw new NotifyException("getAggStatResult error");
         }
     }
-
+    /**
+    * @param queryBuilder
+    * @param sortBuilder
+    * @param missingAggregationBuilder
+    * @param clazz
+    * @Author: 张鸿建
+    * @Date: 2019/11/7
+    * @Desc: 
+    */
+    public static <T> Missing getAggMissResult(QueryBuilder queryBuilder, SortBuilder sortBuilder, MissingAggregationBuilder missingAggregationBuilder, Class<T> clazz) {
+        SearchRequestBuilder searchRequestsBuilder = getSearchRequestsBuilder(queryBuilder, sortBuilder, clazz);
+        SearchResponse response = searchRequestsBuilder.setSize(0).addAggregation(missingAggregationBuilder).execute().actionGet();
+        Aggregation aggregation = response.getAggregations().getAsMap().get("agg");
+        if (aggregation instanceof Missing) {
+            Missing missing = (Missing) aggregation;
+            return missing;
+        } else {
+            throw new NotifyException("getAggMissResult error");
+        }
+    }
 
     /**
      * @param queryBuilder

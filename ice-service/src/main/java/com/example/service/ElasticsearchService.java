@@ -22,6 +22,8 @@ import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
+import org.elasticsearch.search.aggregations.bucket.missing.Missing;
+import org.elasticsearch.search.aggregations.bucket.missing.MissingAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.DateRangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.range.RangeAggregationBuilder;
@@ -90,8 +92,8 @@ public class ElasticsearchService {
         Map<String, Integer> hashMap = new HashMap();
         buckets.forEach(bucket -> {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("city",bucket.getKeyAsString());
-            jsonObject.put("count",new Long(bucket.getDocCount()).intValue());
+            jsonObject.put("city", bucket.getKeyAsString());
+            jsonObject.put("count", new Long(bucket.getDocCount()).intValue());
             array.add(jsonObject);
         });
         return array;
@@ -106,6 +108,7 @@ public class ElasticsearchService {
      */
     public StatEntity getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
         BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+        boolQueryBuilder.must(QueryBuilders.rangeQuery(term).gt(0));
         Stats stat = ElasticsearchUtil.getAggStatResult(boolQueryBuilder, null, term, Qiancheng.class);
         StatEntity statEntity = new StatEntity();
         statEntity.setAvg(stat.getAvg());
@@ -244,10 +247,10 @@ public class ElasticsearchService {
         return hashMap;
     }
 
-    public JSONArray getBrokenLine(String dateType, String queryField) {
+    public JSONArray getBrokenLine(String dateType, String queryField, String dateField) {
         DateHistogramInterval dateHistogramInterval = getDateHistogramInterval(dateType);
-        DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram("agg").field(queryField).dateHistogramInterval(dateHistogramInterval);
-        TermsAggregationBuilder termsAggregationBuilder = AggregationBuilders.terms("agg").field("city");
+        DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram("agg").field(dateField).dateHistogramInterval(dateHistogramInterval);
+        TermsAggregationBuilder termsAggregationBuilder = AggregationBuilders.terms("agg").field(queryField);
         MultiBucketsAggregation subAggDateHistogramResult = ElasticsearchUtil.getSubAggDateHistogramResult(dateHistogramAggregationBuilder, termsAggregationBuilder, Qiancheng.class);
         JSONArray array = new JSONArray();
         subAggDateHistogramResult.getBuckets().forEach(bucket -> {
@@ -276,7 +279,7 @@ public class ElasticsearchService {
             throw new NotifyException("query Type error");
         }
         DateHistogramInterval histogram;
-        switch (queryType) {
+        switch (queryType.toUpperCase()) {
             case "SECOND":
                 histogram = DateHistogramInterval.SECOND;
                 break;
@@ -332,15 +335,60 @@ public class ElasticsearchService {
         JSONArray array = new JSONArray();
         range.getBuckets().forEach(bucket -> {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("date",formatDate(bucket.getKeyAsString()));
-            if("date".equals(field)){
+            jsonObject.put("date", formatDate(bucket.getKeyAsString()));
+            if ("date".equals(field)) {
                 jsonObject.put("发布招聘数量", new Long(bucket.getDocCount()).intValue());
-            }else {
+            } else {
                 jsonObject.put("爬取数据量", new Long(bucket.getDocCount()).intValue());
             }
             array.add(jsonObject);
         });
         return array;
+    }
+    /**
+    * @param city
+    * @param region
+    * @param companyType
+    * @param cotype
+    * @param degree
+    * @param workyear
+    * @param companySize
+    * @param jobTerm
+    * @param dateField
+    * @param fromDate
+    * @param fromTo
+    * @Author: 张鸿建
+    * @Date: 2019/11/7
+    * @Desc: 获取时间访问内数据量
+    */
+    public JSONArray getRangeDateCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String dateField, String fromDate, String fromTo) {
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+        DateRangeAggregationBuilder agg = AggregationBuilders.dateRange("agg").field(dateField).addRange(fromDate, fromTo);
+        Range range = ElasticsearchUtil.getAggDateResult(boolQueryBuilder,null, agg, Qiancheng.class);
+        JSONArray array = new JSONArray();
+        range.getBuckets().forEach(bucket->{
+            JSONObject jsonObject = new JSONObject();
+            String fromAsString = formatDate(bucket.getFromAsString());
+            String toAsString = formatDate(bucket.getToAsString());
+            jsonObject.put(fromAsString+"--"+toAsString,new Long(bucket.getDocCount()).intValue());
+            array.add(jsonObject);
+        });
+        return array;
+    }
+
+    public int getMissFieldCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm,String queryField){
+        BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
+        MissingAggregationBuilder agg = AggregationBuilders.missing("agg").field(queryField);
+        if(queryField!=null&&queryField.contains("Price")){
+            NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+            nativeSearchQueryBuilder.withQuery(boolQueryBuilder);
+            boolQueryBuilder.must(QueryBuilders.rangeQuery(queryField).lte(0));
+            long count = elasticsearchTemplate.count(nativeSearchQueryBuilder.build(), Qiancheng.class);
+            return new Long(count).intValue();
+        }
+        Missing aggMissResult = ElasticsearchUtil.getAggMissResult(boolQueryBuilder, null, agg, Qiancheng.class);
+        long docCount = aggMissResult.getDocCount();
+        return new Long(docCount).intValue();
     }
 
     private BoolQueryBuilder getNativeBuilder(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
