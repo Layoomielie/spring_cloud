@@ -1,32 +1,38 @@
 package com.example.exampleIml;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * @author：张鸿建
  * @time：2019/10/14 15:11
  * @desc：
  **/
-public class Station extends Thread{
-
-    private  int ticket=40;
-    private  Object lock="aa";
+public class Station extends Thread {
+    private int ticket = 40;
+    private Object obj = "aa";
+    private Lock lock = new ReentrantLock(true);
 
     @Override
     public void run() {
-        while(ticket>0){
-            synchronized (lock){
-                if(ticket>0){
-                    System.out.println("当前"+Thread.currentThread().getName()+"正在售出第"+(40-ticket+1)+"张票");
-                }else {
-                    System.out.println("票已售完");
+        while (ticket > 0) {
+            lock.lock();
+            try {
+                if (ticket > 0) {
+                    System.out.println("当前" + Thread.currentThread().getName() + "正在售出第" + (40 - ticket + 1) + "张票");
+                } else {
+                    System.out.println(Thread.currentThread().getName() + ":票已售完");
                 }
                 ticket--;
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
             }
         }
+
     }
 
     public static void main(String[] args) {

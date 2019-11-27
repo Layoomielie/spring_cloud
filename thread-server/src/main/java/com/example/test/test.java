@@ -1,6 +1,8 @@
 package com.example.test;
 
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.Vector;
 
 /**
  * @author：张鸿建
@@ -9,12 +11,9 @@ import java.util.ArrayList;
  **/
 public class test extends Thread{
     public static void main(String[] args) {
-        ArrayList<Object> objects = new ArrayList<>();
-        test.addList(objects);
-        System.out.println(objects);
+        Stack<Object> objects = new Stack<>();
+        objects.add("a");
 
-    }
-    static void addList(ArrayList list){
-        list.add("BB");
+        Vector<Object> objects1 = new Vector<>();
     }
 }
