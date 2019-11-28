@@ -9,6 +9,7 @@ import com.example.entity.StatEntity;
 import com.example.exception.NotifyException;
 import com.example.util.DateStringUtil;
 import com.example.util.ElasticsearchUtil;
+import com.example.util.PageInfo;
 import com.google.common.collect.Lists;
 import org.elasticsearch.ElasticsearchTimeoutException;
 import org.elasticsearch.action.index.IndexRequestBuilder;
@@ -62,14 +63,22 @@ public class ElasticsearchService {
      * @Date: 2019/10/24
      * @Desc: 通过city返回list
      */
-    public List<Qiancheng> getListByCity(String city, int page, int size) {
+    public List<Qiancheng> getListByCity(String city, PageInfo pageInfo) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
-        PageRequest pageRequest = PageRequest.of(page, size);
+        if(pageInfo.getPageSize()<=0){
+            pageInfo.setPageSize(10);
+        }
+        if(pageInfo.getCurrentPageIndex()<=1){
+            pageInfo.setCurrentPageIndex(1);
+        }
+        PageRequest pageRequest = PageRequest.of(pageInfo.getCurrentPageIndex(), pageInfo.getPageSize());
 
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         nativeSearchQueryBuilder.withQuery(boolQueryBuilder);
         nativeSearchQueryBuilder.withPageable(pageRequest);
+        long count = elasticsearchTemplate.count(nativeSearchQueryBuilder.build(),Qiancheng.class);
+        pageInfo.setRowCount(count);
         List<Qiancheng> qianchengs = elasticsearchTemplate.queryForList(nativeSearchQueryBuilder.build(), Qiancheng.class);
         return qianchengs;
     }

@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.entity.Qiancheng;
 import com.example.entity.StatEntity;
 import com.example.service.ElasticsearchService;
+import com.example.util.PageInfo;
+import com.example.util.ReturnResult;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.metrics.percentiles.Percentile;
@@ -34,17 +36,17 @@ public class ElasticsearchController {
 
     /**
      * @param city
-     * @param page
-     * @param size
+     * @param
+     * @param
      * @Author: 张鸿建
      * @Date: 2019/11/7
      * @Desc: 表格统计
      */
     @GetMapping("/city/list")
-    public List<Qiancheng> getListByCity(String city, int page, int size) {
-        List<Qiancheng> list = elasticsearchService.getListByCity(city, page, size);
-        list.forEach(qiancheng -> System.out.println(qiancheng.toString()));
-        return list;
+    public ReturnResult getListByCity(String city, PageInfo pageInfo) {
+        List<Qiancheng> list = elasticsearchService.getListByCity(city, pageInfo);
+        //list.forEach(qiancheng -> System.out.println(qiancheng.toString()));
+        return ReturnResult.ok(list, pageInfo);
     }
 
     /**
@@ -55,9 +57,9 @@ public class ElasticsearchController {
      * @Desc: 饼图统计 词云统计
      */
     @GetMapping("/city/term")
-    public JSONArray getStatByTerm(String city, String term) {
+    public ReturnResult getStatByTerm(String city, String term) {
         JSONArray statByTerm = elasticsearchService.getStatByTerm(city, term);
-        return statByTerm;
+        return ReturnResult.ok(statByTerm);
     }
 
     /**
@@ -75,15 +77,15 @@ public class ElasticsearchController {
      * @Desc: 根据条件对加个参数统计
      */
     @GetMapping("/stat/term")
-    public StatEntity getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
+    public ReturnResult getStatPriceByTerm(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String term) {
         StatEntity statEntity = elasticsearchService.getStatPriceByTerm(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, term);
-        return statEntity;
+        return ReturnResult.ok(statEntity);
     }
 
     @GetMapping("/percen/price")
-    public List<Percentile> getPercenRankByPrice(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] valus) {
+    public ReturnResult getPercenRankByPrice(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] valus) {
         List<Percentile> percenRankByPrice = elasticsearchService.getPercenRankByPrice(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, field, valus);
-        return percenRankByPrice;
+        return ReturnResult.ok(percenRankByPrice);
     }
 
     /**
@@ -102,15 +104,15 @@ public class ElasticsearchController {
      * @Desc: 折线图统计 条形图统计
      */
     @GetMapping("/count/histogram")
-    public JSONArray getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
+    public ReturnResult getCountByHistogram(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, String queryType) {
         JSONArray array = elasticsearchService.getCountByHistogram(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, field, queryType);
-        return array;
+        return ReturnResult.ok(array);
     }
 
     @GetMapping("/date/rank")
-    public Map getDateRangeBucketByField(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, int from, int to, String field) {
+    public ReturnResult getDateRangeBucketByField(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, int from, int to, String field) {
         Map<String, Integer> map = elasticsearchService.getDateRangeBucketByField(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, from, to, field);
-        return map;
+        return ReturnResult.ok(map);
     }
 
     /**
@@ -127,9 +129,9 @@ public class ElasticsearchController {
      * @Desc: 获取某个维度的count数量
      */
     @GetMapping("/query/count")
-    public int getCountByQuery(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
+    public ReturnResult getCountByQuery(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
         int count = elasticsearchService.getCountByQuery(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
-        return count;
+        return ReturnResult.ok(count);
     }
 
     /**
@@ -146,15 +148,15 @@ public class ElasticsearchController {
      * @Desc: 获取昨天统计的某个维度的数量
      */
     @GetMapping("/query/count/today")
-    public int getTodayCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
+    public ReturnResult getTodayCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
         int count = elasticsearchService.getTodayCount(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
-        return count;
+        return ReturnResult.ok(count);
     }
 
     @GetMapping("/percentile/rank")
-    public Map getPercentilesRank(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] values) {
+    public ReturnResult getPercentilesRank(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String field, double[] values) {
         Map map = elasticsearchService.getPercentilesRank(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, field, values);
-        return map;
+        return ReturnResult.ok(map);
     }
 
     /**
@@ -166,20 +168,20 @@ public class ElasticsearchController {
      * @Desc: 折线图 条形图
      */
     @GetMapping("/all/field")
-    public JSONArray getBrokenLine(String DateType, String queryField, String dateField) {
+    public ReturnResult getBrokenLine(String DateType, String queryField, String dateField) {
         JSONArray brokenLine = elasticsearchService.getBrokenLine(DateType, queryField, dateField);
-        return brokenLine;
+        return ReturnResult.ok(brokenLine);
     }
 
     @GetMapping("/range/date/count")
-    public JSONArray getRangeDateCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String dateField, String fromDate, String fromTo) {
+    public ReturnResult getRangeDateCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String dateField, String fromDate, String fromTo) {
         JSONArray rangeDateCount = elasticsearchService.getRangeDateCount(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, dateField, fromDate, fromTo);
-        return rangeDateCount;
+        return ReturnResult.ok(rangeDateCount);
     }
 
     @GetMapping("/missing/count")
-    public int getMissFieldCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String queryField) {
+    public ReturnResult getMissFieldCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String queryField) {
         int missFieldCount = elasticsearchService.getMissFieldCount(city, region, companyType, cotype, degree, workyear, companySize, jobTerm, queryField);
-        return missFieldCount;
+        return ReturnResult.ok(missFieldCount);
     }
 }
