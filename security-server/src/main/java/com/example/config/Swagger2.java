@@ -1,9 +1,15 @@
-package com.example.config;/**
- * ${tag}
- *
- * @author zhanghongjian
- * @Date 2019/6/5 18:00
- */
+package com.example.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+
+/**
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -66,10 +66,10 @@ public class ElasticsearchService {
     public List<Qiancheng> getListByCity(String city, PageInfo pageInfo) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
-        if(pageInfo.getPageSize()<=0){
+        if (pageInfo.getPageSize() <= 0) {
             pageInfo.setPageSize(10);
         }
-        if(pageInfo.getCurrentPageIndex()<=1){
+        if (pageInfo.getCurrentPageIndex() <= 1) {
             pageInfo.setCurrentPageIndex(1);
         }
         PageRequest pageRequest = PageRequest.of(pageInfo.getCurrentPageIndex(), pageInfo.getPageSize());
@@ -77,7 +77,7 @@ public class ElasticsearchService {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         nativeSearchQueryBuilder.withQuery(boolQueryBuilder);
         nativeSearchQueryBuilder.withPageable(pageRequest);
-        long count = elasticsearchTemplate.count(nativeSearchQueryBuilder.build(),Qiancheng.class);
+        long count = elasticsearchTemplate.count(nativeSearchQueryBuilder.build(), Qiancheng.class);
         pageInfo.setRowCount(count);
         List<Qiancheng> qianchengs = elasticsearchTemplate.queryForList(nativeSearchQueryBuilder.build(), Qiancheng.class);
         return qianchengs;
@@ -354,41 +354,42 @@ public class ElasticsearchService {
         });
         return array;
     }
+
     /**
-    * @param city
-    * @param region
-    * @param companyType
-    * @param cotype
-    * @param degree
-    * @param workyear
-    * @param companySize
-    * @param jobTerm
-    * @param dateField
-    * @param fromDate
-    * @param fromTo
-    * @Author: 张鸿建
-    * @Date: 2019/11/7
-    * @Desc: 获取时间访问内数据量
-    */
+     * @param city
+     * @param region
+     * @param companyType
+     * @param cotype
+     * @param degree
+     * @param workyear
+     * @param companySize
+     * @param jobTerm
+     * @param dateField
+     * @param fromDate
+     * @param fromTo
+     * @Author: 张鸿建
+     * @Date: 2019/11/7
+     * @Desc: 获取时间访问内数据量
+     */
     public JSONArray getRangeDateCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String dateField, String fromDate, String fromTo) {
         BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
         DateRangeAggregationBuilder agg = AggregationBuilders.dateRange("agg").field(dateField).addRange(fromDate, fromTo);
-        Range range = ElasticsearchUtil.getAggDateResult(boolQueryBuilder,null, agg, Qiancheng.class);
+        Range range = ElasticsearchUtil.getAggDateResult(boolQueryBuilder, null, agg, Qiancheng.class);
         JSONArray array = new JSONArray();
-        range.getBuckets().forEach(bucket->{
+        range.getBuckets().forEach(bucket -> {
             JSONObject jsonObject = new JSONObject();
             String fromAsString = formatDate(bucket.getFromAsString());
             String toAsString = formatDate(bucket.getToAsString());
-            jsonObject.put(fromAsString+"--"+toAsString,new Long(bucket.getDocCount()).intValue());
+            jsonObject.put(fromAsString + "--" + toAsString, new Long(bucket.getDocCount()).intValue());
             array.add(jsonObject);
         });
         return array;
     }
 
-    public int getMissFieldCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm,String queryField){
+    public int getMissFieldCount(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm, String queryField) {
         BoolQueryBuilder boolQueryBuilder = getNativeBuilder(city, region, companyType, cotype, degree, workyear, companySize, jobTerm);
         MissingAggregationBuilder agg = AggregationBuilders.missing("agg").field(queryField);
-        if(queryField!=null&&queryField.contains("Price")){
+        if (queryField != null && queryField.contains("Price")) {
             NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
             nativeSearchQueryBuilder.withQuery(boolQueryBuilder);
             boolQueryBuilder.must(QueryBuilders.rangeQuery(queryField).lte(0));
@@ -402,7 +403,7 @@ public class ElasticsearchService {
 
     private BoolQueryBuilder getNativeBuilder(String city, String region, String companyType, String cotype, String degree, String workyear, String companySize, String jobTerm) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
-        if (city != null) {
+        if (city != null&&city!="") {
             boolQueryBuilder.must(QueryBuilders.termQuery("city", city));
         }
         if (region != null) {

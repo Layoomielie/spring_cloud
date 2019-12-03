@@ -1,0 +1,13 @@
+server:
+  port: 8930
+spring:
+  application:
+    name: elasticsearch-server
+  data:
+    elasticsearch:
+      cluster-nodes: 10.100.23.97:9300,10.100.23.98:9300,10.100.23.99:9300
+      cluster-name: es_cluster
+management:
+  health:
+    elasticsearch:
+      enabled: false
