@@ -1,5 +1,7 @@
 package com.example.util;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import sun.misc.BASE64Encoder;
 
 import java.security.MessageDigest;
@@ -44,8 +46,20 @@ public class TokenProccessor {
         return null;
     }
 
+    public static String MD5Pwd(String username, String pwd) {
+        // 加密算法MD5
+        // salt盐 username + salt
+        // 迭代次数
+        String md5Pwd = new SimpleHash("MD5", pwd,
+                ByteSource.Util.bytes(username + "-zhanghongjian"), 2).toHex();
+        return md5Pwd;
+    }
+
     public static void main(String[] args) {
-        String s = new TokenProccessor().makeToken();
-        System.out.println(s);
+        /*String s = new TokenProccessor().makeToken();
+        System.out.println(s);*/
+
+        String a = TokenProccessor.MD5Pwd("admin", "123456");
+        System.out.println(a);
     }
 }

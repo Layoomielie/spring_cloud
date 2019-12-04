@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 @Controller
 public class UserController {
-    @RequiresPermissions("user:show")
+    @RequiresPermissions("user:admin")
     @ResponseBody
     @RequestMapping("/show")
     public String showUser() {

@@ -30,17 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http.authorizeRequests().antMatchers("/","/hello").permitAll().anyRequest().authenticated().and().logout().permitAll().and().formLogin();
-       http.csrf().disable();
+        http.authorizeRequests().antMatchers("/", "/hello").permitAll().anyRequest().authenticated().and().logout().permitAll().and().formLogin();
+        http.csrf().disable();
     }
 
     @Override
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder()).withUser("admin").password("123456").roles("ADMIN");
-        auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder()).withUser("zhangsan").password("123456").roles("ADMIN");
-        auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder()).withUser("lisi").password("123456").roles("USER");*/
-        auth.userDetailsService(myUserDetailService);
+        String passwordEncode = new MyPasswordEncoder().encode("123456");
+        auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder()).withUser("admin").password(passwordEncode).roles("ADMIN");
+        auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder()).withUser("zhangsan").password(passwordEncode).roles("ADMIN");
+        auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder()).withUser("lisi").password(passwordEncode).roles("USER");
+
+        // 自己配置用户校验认证
+        //auth.userDetailsService(myUserDetailService);
 
         //使用spring表结构 users.ddl
         //auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("");
@@ -48,6 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("js/**","images/**");
+        web.ignoring().antMatchers("js/**", "images/**");
     }
 }

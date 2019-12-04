@@ -21,6 +21,9 @@ import java.util.Map;
  * @author：张鸿建
  * @time：2019/7/17 14:53
  * @desc：
+ * 1. subject代表正在执行的用户，也可以是第三方账号
+ * 2. securityManager是shiro的核心
+ * 3. realm是用户和shiro数据交互的桥梁 身份认证 权限认证都在这里完成
  **/
 @Configuration
 public class ShiroConfig {
@@ -28,6 +31,7 @@ public class ShiroConfig {
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
@@ -109,14 +113,6 @@ public class ShiroConfig {
         return hashedCredentialsMatcher;
     }
 
-    public static String MD5Pwd(String username, String pwd) {
-        // 加密算法MD5
-        // salt盐 username + salt
-        // 迭代次数
-        String md5Pwd = new SimpleHash("MD5", pwd,
-                ByteSource.Util.bytes(username + "salt"), 2).toHex();
-        return md5Pwd;
-    }
 
 
 }
