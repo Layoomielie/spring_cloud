@@ -27,7 +27,13 @@ import java.util.Map;
  **/
 @Configuration
 public class ShiroConfig {
-
+    
+    /**
+    * @param securityManager
+    * @Author: 张鸿建
+    * @Date: 2019/12/4
+    * @Desc: 配置shiro过滤器  拦截未登录的请求
+    */
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -51,13 +57,20 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
 
     }
-
+    
+    /**
+    * 
+    * @Author: 张鸿建
+    * @Date: 2019/12/4
+    * @Desc: 创建安全管理器，主要为了协调里面各种安全组件
+    */
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
         defaultSecurityManager.setRealm(customRealm());
         return defaultSecurityManager;
     }
+
 
     @Bean
     public CustomRealm customRealm() {
@@ -80,6 +93,7 @@ public class ShiroConfig {
      * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
      * * @return
      */
+
     @Bean
     @DependsOn({"lifecycleBeanPostProcessor"})
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
