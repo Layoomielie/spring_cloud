@@ -30,6 +30,10 @@
         <option value="$PROJECT_DIR$/sleuth-server/pom.xml" />
         <option value="$PROJECT_DIR$/zipkin-server/pom.xml" />
         <option value="$PROJECT_DIR$/ice-service/pom.xml" />
+        <option value="$PROJECT_DIR$/poi-server/pom.xml" />
+        <option value="$PROJECT_DIR$/oauth2-server/pom.xml" />
+        <option value="$PROJECT_DIR$/press-test-server/pom.xml" />
+        <option value="$PROJECT_DIR$/shiro2-server/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -7,33 +7,37 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eureka-server" />
+        <module name="actuator-server" />
+        <module name="zipkin-server" />
+        <module name="feige-server" />
+        <module name="freemark-server" />
         <module name="elasticsearch-server" />
-        <module name="config-server" />
+        <module name="hi-service" />
+        <module name="poi-server" />
+        <module name="press-test-server" />
+        <module name="ribbon-service" />
+        <module name="jpush-server" />
+        <module name="ice-service" />
+        <module name="stream-service" />
+        <module name="quartz-server" />
         <module name="config-client" />
         <module name="stream1-service" />
-        <module name="hi-service" />
-        <module name="jpush-server" />
-        <module name="upload-service" />
+        <module name="config-server" />
         <module name="ferigin-server" />
-        <module name="turbin-service" />
-        <module name="ice-service" />
-        <module name="quartz-server" />
-        <module name="stream-service" />
-        <module name="actuator-server" />
-        <module name="freemark-server" />
-        <module name="stream2-service" />
-        <module name="appframework" />
-        <module name="feige-server" />
-        <module name="zipkin-server" />
-        <module name="ribbon-service" />
-        <module name="zuul-server" />
+        <module name="upload-service" />
+        <module name="oauth2-server" />
+        <module name="sleuth-server" />
         <module name="rabbit-server" />
-        <module name="security-server" />
         <module name="kafka-server" />
+        <module name="shiro2-server" />
+        <module name="eureka-server" />
+        <module name="security-server" />
+        <module name="appframework" />
+        <module name="turbin-service" />
+        <module name="zuul-server" />
+        <module name="stream2-service" />
         <module name="thread-server" />
         <module name="shiro-service" />
-        <module name="sleuth-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -41,6 +45,7 @@
       <module name="eurekaservice" target="1.5" />
       <module name="ferigin-server" target="1.8" />
       <module name="kafka" target="1.8" />
+      <module name="shiro2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -59,11 +64,16 @@
       <module name="jpush-server" options="-parameters" />
       <module name="kafka" options="-parameters" />
       <module name="kafka-server" options="-parameters" />
+      <module name="oauth2-server" options="-parameters" />
+      <module name="poi-server" options="-parameters" />
+      <module name="press-test-server" options="-parameters" />
       <module name="quartz-server" options="-parameters" />
       <module name="rabbit-server" options="-parameters" />
       <module name="ribbon-service" options="-parameters" />
       <module name="security-server" options="-parameters" />
       <module name="shiro-service" options="-parameters" />
+      <module name="shiro2" options="-parameters" />
+      <module name="shiro2-server" options="-parameters" />
       <module name="sleuth-server" options="-parameters" />
       <module name="stream-service" options="-parameters" />
       <module name="stream1-service" options="-parameters" />
