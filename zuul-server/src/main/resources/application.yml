@@ -1,8 +1,16 @@
 server:
   port: 5000
 spring:
+
   application:
     name: zuul-server
+  zipkin:
+    base-url: http://localhost:8834
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
 #  rabbitmq:
 #    host: 47.103.17.23
 #    port: 5672

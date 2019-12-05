@@ -32,8 +32,8 @@ public class HelloController {
     @ApiOperation(value = "hello", notes = "获取hello信息")
     @ApiImplicitParam(name = "name", value = "用户名字", required = true, dataType = "String")
     @GetMapping("hello")
-    public String hello(String name) {
-        return name;
+    public String hello() {
+        return "hello";
     }
 
 

@@ -24,4 +24,9 @@ public class MyPasswordEncoder implements PasswordEncoder {
     public boolean matches(CharSequence charSequence, String s) {
         return encoder.matches(charSequence, s);
     }
+
+    public static void main(String[] args) {
+        String encode = new MyPasswordEncoder().encode("123456");
+        System.out.println(encode);
+    }
 }
