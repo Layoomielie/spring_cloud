@@ -5,7 +5,7 @@ server:
 spring:
   data:
     elasticsearch:
-      cluster-nodes: 139.224.233.92:9300
+      cluster-nodes: 47.99.153.82:9300
       cluster-name: docker-cluster
   datasource:
     username: root
@@ -17,8 +17,6 @@ spring:
     port: 6379
     password: 44253432
 management:
-  security:
-    enabled: false
   health:
     elasticsearch:
       enabled: false
