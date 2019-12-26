@@ -34,6 +34,9 @@ public class ShiroConfig {
     @Autowired
     private RedisManager redisManager;
 
+    //@Autowired
+    //private FilterService filterService;
+
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         logger.info("正在进行权限过滤 shiro ");
@@ -43,6 +46,16 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
+        /*ArrayList<Integer> list = new ArrayList<>();
+        list.add(Filter.ANON);
+        list.add(Filter.AUTHC);
+        Optional<List<Filter>> filterOptional = filterService.getFilterListByStatus(list);
+        if(filterOptional.isPresent()){
+            List<Filter> filters = filterOptional.get();
+            filters.forEach( filter -> {
+                filterChainDefinitionMap.put(filter.getPath(),filter.getLevel());
+            });
+        }*/
         filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/", "anon");

@@ -2,7 +2,9 @@ package com.example.controller;
 
 import com.example.dao.AuthorityDao;
 import com.example.entity.Authority;
+import com.example.entity.Filter;
 import com.example.entity.User;
+import com.example.service.FilterService;
 import com.example.service.UserService;
 import com.example.util.ReturnResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +26,13 @@ import java.util.Optional;
 public class AuthController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    AuthorityDao authorityDao;
+    private AuthorityDao authorityDao;
+
+    @Autowired
+    private FilterService filterService;
 
     @GetMapping("/user")
     public ReturnResult rootInfo(String uid) {
@@ -45,6 +51,19 @@ public class AuthController {
             return ReturnResult.ok(authorities);
         } else {
             return ReturnResult.error("您的账号没有任何权限");
+        }
+    }
+
+    @GetMapping("/filter")
+    public ReturnResult filterInfo() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        Optional<List<Filter>> optional = filterService.getFilterListByStatus(list);
+        if (optional.isPresent()) {
+            return ReturnResult.ok(optional.get());
+        } else {
+            return ReturnResult.error("失败");
         }
     }
 }
