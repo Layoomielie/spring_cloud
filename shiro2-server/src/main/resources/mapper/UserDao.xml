@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dao.AuthorityDao">
-  <resultMap id="BaseResultMap" type="com.example.entity.Authority">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="auth_name" jdbcType="VARCHAR" property="authName" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+<mapper namespace="com.example.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.example.entity.User">
+    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,84 +65,86 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, auth_name, `uid`
+    `uid`, username, `password`
   </sql>
-  <select id="selectByExample" parameterType="com.example.query.AuthorityExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.query.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from authority
+    from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from authority
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    a.*
-    from authority a,User u
-    where  u.uid=a.uid and u.uid = #{uid,jdbcType=VARCHAR}
+    from user
+    where `uid` = #{uid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from authority
-    where id = #{id,jdbcType=VARCHAR}
+    delete from user
+    where `uid` = #{uid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.query.AuthorityExample">
-    delete from authority
+  <delete id="deleteByExample" parameterType="com.example.query.UserExample">
+    delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.entity.Authority" useGeneratedKeys="true">
-    insert into authority (auth_name, `uid`)
-    values (#{authName,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="com.example.entity.User" useGeneratedKeys="true">
+    insert into user (username, `password`)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.entity.Authority" useGeneratedKeys="true">
-    insert into authority
+  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="com.example.entity.User" useGeneratedKeys="true">
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="authName != null">
-        auth_name,
+      <if test="username != null">
+        username,
       </if>
-      <if test="uid != null">
-        `uid`,
+      <if test="password != null">
+        `password`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="authName != null">
-        #{authName,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.query.AuthorityExample" resultType="java.lang.Long">
-    select count(*) from authority
+  <select id="countByExample" parameterType="com.example.query.UserExample" resultType="java.lang.Long">
+    select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update authority
+    update user
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.authName != null">
-        auth_name = #{record.authName,jdbcType=VARCHAR},
-      </if>
       <if test="record.uid != null">
         `uid` = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -150,31 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update authority
-    set id = #{record.id,jdbcType=VARCHAR},
-      auth_name = #{record.authName,jdbcType=VARCHAR},
-      `uid` = #{record.uid,jdbcType=VARCHAR}
+    update user
+    set `uid` = #{record.uid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.entity.Authority">
-    update authority
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.entity.User">
+    update user
     <set>
-      <if test="authName != null">
-        auth_name = #{authName,jdbcType=VARCHAR},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null">
-        `uid` = #{uid,jdbcType=VARCHAR},
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where `uid` = #{uid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.entity.Authority">
-    update authority
-    set auth_name = #{authName,jdbcType=VARCHAR},
-      `uid` = #{uid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.example.entity.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR}
+    where `uid` = #{uid,jdbcType=VARCHAR}
   </update>
-
 </mapper>

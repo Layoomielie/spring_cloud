@@ -1,8 +1,12 @@
 package com.example.service;
 
+import com.example.dao.AuthorityDao;
+import com.example.entity.Authority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,11 +16,19 @@ import java.util.Set;
  **/
 @Service
 public class AuthService {
-    public Set<String> findAuthByUserId(String userId){
+
+    @Autowired
+    private AuthorityDao authorityDao;
+
+    public Set<String> findAuthByUserId(String uid) {
+        List<Authority> authorities = authorityDao.selectByUserId(uid);
         Set<String> set = new HashSet<>();
-        //list.add(new Authority("1","add"));
-        set.add("user:show");
-        set.add("user:admin");
+        for (Authority authority : authorities) {
+            set.add(authority.getAuthName());
+        }
         return set;
     }
+
+
+
 }

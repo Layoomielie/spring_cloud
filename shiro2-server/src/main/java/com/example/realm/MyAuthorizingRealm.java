@@ -66,11 +66,11 @@ public class MyAuthorizingRealm extends AuthorizingRealm {
         String username = authToken.getUsername();
         Optional<User> optional = userService.getUserByUserName(username);
         if (!optional.isPresent()) {
-            logger.info("账号不存在");
+            logger.error("账号不存在");
+            return null;
         }
         User user = optional.get();
-
-        return new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(username+User.salt), getName());
+        return new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(username+User.SALT), getName());
     }
 
     /**
@@ -83,7 +83,12 @@ public class MyAuthorizingRealm extends AuthorizingRealm {
         // salt盐 username + salt
         // 迭代次数
         String md5Pwd = new SimpleHash("MD5", pwd,
-                ByteSource.Util.bytes(username + User.salt), 2).toHex();
+                ByteSource.Util.bytes(username + User.SALT), 2).toHex();
         return md5Pwd;
+    }
+
+    public static void main(String[] args) {
+        String ps = MD5Pwd("root", "123456");
+        System.out.println(ps);
     }
 }
