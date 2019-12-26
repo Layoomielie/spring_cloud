@@ -2,15 +2,12 @@ package com.example.realm;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.apache.tomcat.util.security.MD5Encoder;
-import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +21,8 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        String token = (String)principalCollection.getPrimaryPrincipal();
+
         String username = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> stringSet = new HashSet<>();

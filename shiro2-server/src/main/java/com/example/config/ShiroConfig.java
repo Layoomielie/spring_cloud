@@ -1,13 +1,19 @@
 package com.example.config;
 
-import com.example.realm.CustomRealm;
+import com.example.realm.MyAuthorizingRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -17,28 +23,24 @@ import java.util.Map;
 
 /**
  * @author：张鸿建
- * @time：2019/7/17 14:53
+ * @time：2019/12/25 15:39
  * @desc：
- * 1. subject代表正在执行的用户，也可以是第三方账号
- * 2. securityManager是shiro的核心
- * 3. realm是用户和shiro数据交互的桥梁 身份认证 权限认证都在这里完成
  **/
 @Configuration
 public class ShiroConfig {
-    
-    /**
-    * @param securityManager
-    * @Author: 张鸿建
-    * @Date: 2019/12/4
-    * @Desc: 配置shiro过滤器  拦截未登录的请求
-    */
-    @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 
+    private Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
+
+    @Autowired
+    private RedisManager redisManager;
+
+    @Bean
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+        logger.info("正在进行权限过滤 shiro ");
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/webjars/**", "anon");
@@ -53,30 +55,57 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
-
     }
-    
+
     /**
-    * 
-    * @Author: 张鸿建
-    * @Date: 2019/12/4
-    * @Desc: 创建安全管理器，主要为了协调里面各种安全组件
-    */
+     * @Author: 张鸿建
+     * @Date: 2019/12/25
+     * @Desc: 配置安全管理器
+     */
     @Bean
     public SecurityManager securityManager() {
-        DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
-        defaultSecurityManager.setRealm(customRealm());
-        return defaultSecurityManager;
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(authShiroRealm());
+        // 自定义缓存实现，使用 Redis
+        securityManager.setCacheManager(cacheManager());
+        return securityManager;
+    }
+
+    @Bean
+    public RedisCacheManager cacheManager() {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager);
+        return redisCacheManager;
+    }
+
+    /**
+     * @Author: 张鸿建
+     * @Date: 2019/12/25
+     * @Desc: 设置授权领域
+     */
+    @Bean
+    public AuthorizingRealm authShiroRealm() {
+        MyAuthorizingRealm authShiroRealm = new MyAuthorizingRealm();
+        authShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        authShiroRealm.setCachingEnabled(false);
+        return authShiroRealm;
     }
 
 
+    /**
+     * @Author: 张鸿建
+     * @Date: 2019/12/25
+     * @Desc: 设置匹配规则
+     */
     @Bean
-    public CustomRealm customRealm() {
-        CustomRealm customRealm = new CustomRealm();
-        // 告诉realm,使用credentialsMatcher加密算法类来验证密文
-        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-        customRealm.setCachingEnabled(false);
-        return customRealm;
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        // 使用 MD5 散列算法
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        // 散列次数
+        hashedCredentialsMatcher.setHashIterations(2);
+        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return hashedCredentialsMatcher;
     }
 
     @Bean
@@ -85,13 +114,11 @@ public class ShiroConfig {
     }
 
     /**
-     * *
-     * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
-     * *
-     * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
-     * * @return
-     */
-
+    *
+    * @Author: 张鸿建
+    * @Date: 2019/12/25
+    * @Desc: 设置授权环绕
+    */
     @Bean
     @DependsOn({"lifecycleBeanPostProcessor"})
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
@@ -106,25 +133,5 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
         return authorizationAttributeSourceAdvisor;
     }
-    
-    /**
-    *
-    * @Author: 张鸿建
-    * @Date: 2019/7/17
-    * @Desc: 加密算法  设置凭证匹配器
-    */
-    @Bean(name = "credentialsMatcher")
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        // 散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-        // 散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
-        // storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码
-        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
-        return hashedCredentialsMatcher;
-    }
-
-
 
 }
