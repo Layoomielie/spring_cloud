@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.service.Oauth2ClientServiceDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,14 +46,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll();
     }
 
+    @Resource
+    Oauth2ClientServiceDetail oauth2ClientServiceDetail;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //auth.userDetailsService(userDetailsService()).passwordEncoder(this.passwordEncoder());
         //auth.userDetailsService(userDetailsService()).passwordEncoder(this.passwordEncoder());
         //auth.userDetailsService(oauth2ClientServiceDetail).passwordEncoder(this.passwordEncoder());
-        auth.userDetailsService(jdbcUserDetailsService()).passwordEncoder(this.passwordEncoder());
-
+        //auth.userDetailsService(jdbcUserDetailsService()).passwordEncoder(this.passwordEncoder());
+        auth.userDetailsService(oauth2ClientServiceDetail).passwordEncoder(this.passwordEncoder());
     }
+
+
 
     @Bean
     protected UserDetailsService jdbcUserDetailsService() {

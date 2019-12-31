@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.entity.User;
+import com.example.entity.Users;
 import com.example.service.UserService;
 import com.example.util.ReturnResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ public class AuthController {
 
     @RequestMapping("/userInfo")
     public ReturnResult getUserInfo(String username) {
-        Optional<List<User>> optional = userService.getUserByUserName(username);
+        Optional<List<Users>> optional = userService.getUserByUserName(username);
         if (optional.isPresent()) {
-            List<User> users = optional.get();
+            List<Users> users = optional.get();
             return ReturnResult.ok(users.get(0));
         }else {
             return ReturnResult.error("当前用户不存在");

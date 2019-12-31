@@ -20,10 +20,10 @@ public class AuthoritiesService {
     @Autowired
     AuthoritiesDao authoritiesDao;
 
-    public Optional<List<Authorities>> getAuthoritiesInfo(int uid){
+    public Optional<List<Authorities>> getAuthoritiesInfo(String username) {
         AuthoritiesExample authoritiesExample = new AuthoritiesExample();
         AuthoritiesExample.Criteria criteria = authoritiesExample.createCriteria();
-        criteria.andUidEqualTo(uid);
+        criteria.andUsernameEqualTo(username);
         List<Authorities> authorities = authoritiesDao.selectByExample(authoritiesExample);
         return Optional.of(authorities);
     }

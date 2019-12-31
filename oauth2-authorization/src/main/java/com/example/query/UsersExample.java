@@ -3,7 +3,7 @@ package com.example.query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserExample {
+public class UsersExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class UserExample {
 
     private Long offset;
 
-    public UserExample() {
+    public UsersExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -122,66 +122,6 @@ public class UserExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        public Criteria andUidIsNull() {
-            addCriterion("`uid` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidIsNotNull() {
-            addCriterion("`uid` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidEqualTo(Integer value) {
-            addCriterion("`uid` =", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotEqualTo(Integer value) {
-            addCriterion("`uid` <>", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidGreaterThan(Integer value) {
-            addCriterion("`uid` >", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("`uid` >=", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidLessThan(Integer value) {
-            addCriterion("`uid` <", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidLessThanOrEqualTo(Integer value) {
-            addCriterion("`uid` <=", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidIn(List<Integer> values) {
-            addCriterion("`uid` in", values, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotIn(List<Integer> values) {
-            addCriterion("`uid` not in", values, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidBetween(Integer value1, Integer value2) {
-            addCriterion("`uid` between", value1, value2, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotBetween(Integer value1, Integer value2) {
-            addCriterion("`uid` not between", value1, value2, "uid");
-            return (Criteria) this;
         }
 
         public Criteria andUsernameIsNull() {
@@ -321,6 +261,66 @@ public class UserExample {
 
         public Criteria andPasswordNotBetween(String value1, String value2) {
             addCriterion("`password` not between", value1, value2, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledIsNull() {
+            addCriterion("enabled is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledIsNotNull() {
+            addCriterion("enabled is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledEqualTo(Boolean value) {
+            addCriterion("enabled =", value, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledNotEqualTo(Boolean value) {
+            addCriterion("enabled <>", value, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledGreaterThan(Boolean value) {
+            addCriterion("enabled >", value, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("enabled >=", value, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledLessThan(Boolean value) {
+            addCriterion("enabled <", value, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledLessThanOrEqualTo(Boolean value) {
+            addCriterion("enabled <=", value, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledIn(List<Boolean> values) {
+            addCriterion("enabled in", values, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledNotIn(List<Boolean> values) {
+            addCriterion("enabled not in", values, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledBetween(Boolean value1, Boolean value2) {
+            addCriterion("enabled between", value1, value2, "enabled");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnabledNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("enabled not between", value1, value2, "enabled");
             return (Criteria) this;
         }
     }

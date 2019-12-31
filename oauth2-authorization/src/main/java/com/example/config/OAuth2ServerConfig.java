@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.service.Oauth2ClientServiceDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -83,7 +84,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         clients.withClientDetails(clientDetails());
 
     }
-
+    @Resource
+    Oauth2ClientServiceDetail oauth2ClientServiceDetail;
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
@@ -93,7 +95,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         //endpoints.tokenStore()
         endpoints.tokenStore(tokenStore());
         //endpoints.userDetailsService(userDetailsService);
-        endpoints.userDetailsService(jdbcUserDetailsService);
+        //endpoints.userDetailsService(jdbcUserDetailsService);
+        endpoints.userDetailsService(oauth2ClientServiceDetail);
         //endpoints.userDetailsService(oauth2ClientServiceDetail);
 
     }

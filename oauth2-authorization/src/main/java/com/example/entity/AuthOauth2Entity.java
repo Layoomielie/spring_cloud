@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @time：2019/12/30 11:36
  * @desc：
  **/
-public class AuthOauth2Entity implements GrantedAuthority {
+public class AuthOauth2Entity implements GrantedAuthority{
 
     private String auth;
 

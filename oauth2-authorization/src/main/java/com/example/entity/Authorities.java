@@ -1,6 +1,7 @@
 package com.example.entity;
 
-import javax.persistence.Id;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -10,21 +11,20 @@ import java.io.Serializable;
  */
 @Table(name="authorities")
 public class Authorities implements Serializable {
-    @Id
-    private Integer id;
+    @NotEmpty
+    private String username;
 
+    @NotEmpty
     private String authority;
-
-    private Integer uid;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAuthority() {
@@ -33,14 +33,6 @@ public class Authorities implements Serializable {
 
     public void setAuthority(String authority) {
         this.authority = authority;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     @Override
@@ -55,18 +47,16 @@ public class Authorities implements Serializable {
             return false;
         }
         Authorities other = (Authorities) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getAuthority() == null ? other.getAuthority() == null : this.getAuthority().equals(other.getAuthority()))
-            && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()));
+        return (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+            && (this.getAuthority() == null ? other.getAuthority() == null : this.getAuthority().equals(other.getAuthority()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getAuthority() == null) ? 0 : getAuthority().hashCode());
-        result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         return result;
     }
 
@@ -76,9 +66,8 @@ public class Authorities implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
+        sb.append(", username=").append(username);
         sb.append(", authority=").append(authority);
-        sb.append(", uid=").append(uid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -2,10 +2,12 @@ package com.example.service;
 
 import com.example.entity.AuthOauth2Entity;
 import com.example.entity.Authorities;
-import com.example.entity.User;
+import com.example.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,15 +30,15 @@ public class Oauth2ClientServiceDetail implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<List<User>> Useroptional = userService.getUserByUserName(username);
-        User user;
+        Optional<List<Users>> Useroptional = userService.getUserByUserName(username);
+        Users user;
         if(Useroptional.isPresent()){
-            List<User> users = Useroptional.get();
+            List<Users> users = Useroptional.get();
             user=users.get(0);
         }else {
             return null;
         }
-        Optional<List<Authorities>> optional = authoritiesService.getAuthoritiesInfo(user.getUid());
+        Optional<List<Authorities>> optional = authoritiesService.getAuthoritiesInfo(user.getUsername());
         List<Authorities> authorities=new ArrayList<>();
         List<AuthOauth2Entity> authOauth2Entities = new ArrayList<>();
         if(optional.isPresent()){
