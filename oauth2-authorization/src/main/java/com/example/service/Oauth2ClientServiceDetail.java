@@ -3,11 +3,12 @@ package com.example.service;
 import com.example.entity.AuthOauth2Entity;
 import com.example.entity.Authorities;
 import com.example.entity.Users;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.Optional;
 @Service
 public class Oauth2ClientServiceDetail implements UserDetailsService {
 
+    final static Logger logger = LoggerFactory.getLogger(Oauth2ClientServiceDetail.class);
+
     @Autowired
     UserService userService;
 
@@ -32,26 +35,26 @@ public class Oauth2ClientServiceDetail implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<List<Users>> Useroptional = userService.getUserByUserName(username);
         Users user;
-        if(Useroptional.isPresent()){
+        if (Useroptional.isPresent()) {
             List<Users> users = Useroptional.get();
-            user=users.get(0);
-        }else {
+            user = users.get(0);
+        } else {
             return null;
         }
         Optional<List<Authorities>> optional = authoritiesService.getAuthoritiesInfo(user.getUsername());
-        List<Authorities> authorities=new ArrayList<>();
+        List<Authorities> authorities = new ArrayList<>();
         List<AuthOauth2Entity> authOauth2Entities = new ArrayList<>();
-        if(optional.isPresent()){
-             authorities = optional.get();
+        if (optional.isPresent()) {
+            authorities = optional.get();
             authorities.forEach(authority -> {
                 AuthOauth2Entity authOauth2Entity = new AuthOauth2Entity(authority.getAuthority());
                 authOauth2Entities.add(authOauth2Entity);
             });
-        }else {
+        } else {
             return null;
         }
 
-        org.springframework.security.core.userdetails.User oauthUser = new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),authOauth2Entities);
+        org.springframework.security.core.userdetails.User oauthUser = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authOauth2Entities);
 
         return oauthUser;
     }

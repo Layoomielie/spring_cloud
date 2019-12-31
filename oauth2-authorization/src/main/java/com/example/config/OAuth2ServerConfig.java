@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -47,8 +46,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private RedisConnectionFactory connectionFactory;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    //@Autowired
+    //private UserDetailsService userDetailsService;
 
     /*@Autowired
     private Oauth2ClientServiceDetail oauth2ClientServiceDetail;*/
@@ -56,8 +55,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Resource(name ="jdbcUserDetailsService")
-    private UserDetailsService jdbcUserDetailsService;
+    //@Resource(name ="jdbcUserDetailsService")
+    //private UserDetailsService jdbcUserDetailsService;
 
 
     @Override
@@ -65,7 +64,8 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         security
                 .realm("oauth2-resources") //code授权添加
                 .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()") //allow check token
+                .checkTokenAccess("permitAll()")
+                //.checkTokenAccess("isAuthenticated()") //allow check token
                 .allowFormAuthenticationForClients();
     }
 
@@ -86,6 +86,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
     @Resource
     Oauth2ClientServiceDetail oauth2ClientServiceDetail;
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
@@ -96,6 +97,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         endpoints.tokenStore(tokenStore());
         //endpoints.userDetailsService(userDetailsService);
         //endpoints.userDetailsService(jdbcUserDetailsService);
+
         endpoints.userDetailsService(oauth2ClientServiceDetail);
         //endpoints.userDetailsService(oauth2ClientServiceDetail);
 

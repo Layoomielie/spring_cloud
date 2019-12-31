@@ -1,0 +1,20 @@
+security:
+  oauth2:
+    resource:
+      id: oauth2-resource
+      token-info-uri: http://localhost:5450/oauth/check_token
+      #user-info-uri: http://localhost:8080/uaa/user
+      #prefer-token-info: false
+      token-type: client_credentials
+    #authorization:
+      #check-token-access: http://localhost:5450/oauth/check_token
+    client:
+      client-id: admin
+      #client-secret: 456789
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://rm-uf6h10w84d8f1wy4p7o.mysql.rds.aliyuncs.com:3306/security2?characterEncoding=UTF-8
+    username: root
+    password: Sink44253432

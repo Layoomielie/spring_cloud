@@ -9,11 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -35,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Resource
     private DataSource dataSource;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -50,36 +47,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     Oauth2ClientServiceDetail oauth2ClientServiceDetail;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(userDetailsService()).passwordEncoder(this.passwordEncoder());
+        //auth.userDetailsService(this.userDetailsService()).passwordEncoder(this.passwordEncoder());
         //auth.userDetailsService(userDetailsService()).passwordEncoder(this.passwordEncoder());
         //auth.userDetailsService(oauth2ClientServiceDetail).passwordEncoder(this.passwordEncoder());
         //auth.userDetailsService(jdbcUserDetailsService()).passwordEncoder(this.passwordEncoder());
+
         auth.userDetailsService(oauth2ClientServiceDetail).passwordEncoder(this.passwordEncoder());
     }
 
 
 
-    @Bean
+    /*@Bean
     protected UserDetailsService jdbcUserDetailsService() {
         //String passwordEncode = new MyPasswordEncoder().encode("123456");
         //String passwordEncode = bCryptPasswordEncoder.encode("123456");
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         return jdbcUserDetailsManager;
-    }
+    }*/
+
     //配置内存模式的用户
-    @Bean
+    /*@Bean
     @Override
     protected UserDetailsService userDetailsService() {
         //String passwordEncode = new MyPasswordEncoder().encode("123456");
-        String passwordEncode = bCryptPasswordEncoder.encode("123456");
+        String passwordEncode = bCryptPasswordEncoder.encode("456789");
 
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("demoUser1").password(passwordEncode).authorities("USER").build());
-        manager.createUser(User.withUsername("demoUser2").password(passwordEncode).authorities("USER").build());
+        manager.createUser(User.withUsername("admin").password(passwordEncode).authorities("USER").build());
+        manager.createUser(User.withUsername("admin").password(passwordEncode).authorities("USER").build());
 
 
         return manager;
-    }
+    }*/
 
     /**
      * 需要配置这个支持password模式

@@ -9,4 +9,7 @@ spring:
     name: shiro2-service
 server:
   port: 5450
-
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:5450/oauth/check_token

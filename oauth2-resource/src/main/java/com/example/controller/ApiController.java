@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ApiController {
 
-    @RequestMapping("/auth")
+    @RequestMapping("/hi")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public String getAuthCode(){
         System.out.println("auth sucess");
         return "auth sucess";

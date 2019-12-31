@@ -17,4 +17,10 @@ public class ApiController {
         System.out.println("hello world");
         return "auth sucess";
     }
+    @RequestMapping("/good")
+    public String getGood(){
+        System.out.println("hello world");
+        return "auth sucess";
+    }
+
 }
