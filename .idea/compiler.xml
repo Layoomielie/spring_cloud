@@ -7,15 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ribbon-service" />
         <module name="actuator-server" />
-        <module name="zipkin-server" />
         <module name="feige-server" />
         <module name="freemark-server" />
         <module name="elasticsearch-server" />
         <module name="hi-service" />
+        <module name="template-server" />
         <module name="poi-server" />
         <module name="press-test-server" />
-        <module name="ribbon-service" />
+        <module name="shiro-service" />
         <module name="jpush-server" />
         <module name="ice-service" />
         <module name="stream-service" />
@@ -26,6 +27,7 @@
         <module name="ferigin-server" />
         <module name="upload-service" />
         <module name="oauth2-server" />
+        <module name="oauth2-authorization" />
         <module name="sleuth-server" />
         <module name="rabbit-server" />
         <module name="kafka-server" />
@@ -34,10 +36,10 @@
         <module name="security-server" />
         <module name="appframework" />
         <module name="turbin-service" />
-        <module name="zuul-server" />
+        <module name="zipkin-server" />
         <module name="stream2-service" />
         <module name="thread-server" />
-        <module name="shiro-service" />
+        <module name="zuul-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -64,6 +66,7 @@
       <module name="jpush-server" options="-parameters" />
       <module name="kafka" options="-parameters" />
       <module name="kafka-server" options="-parameters" />
+      <module name="oauth2-authorization" options="-parameters" />
       <module name="oauth2-server" options="-parameters" />
       <module name="poi-server" options="-parameters" />
       <module name="press-test-server" options="-parameters" />
@@ -78,6 +81,7 @@
       <module name="stream-service" options="-parameters" />
       <module name="stream1-service" options="-parameters" />
       <module name="stream2-service" options="-parameters" />
+      <module name="template-server" options="-parameters" />
       <module name="thread-server" options="-parameters" />
       <module name="turbin-service" options="-parameters" />
       <module name="upload-service" options="-parameters" />
