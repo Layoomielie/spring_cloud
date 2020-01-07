@@ -13,7 +13,7 @@ public interface AuthorityDao {
 
     int deleteByExample(AuthorityExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Authority record);
 
@@ -21,9 +21,7 @@ public interface AuthorityDao {
 
     List<Authority> selectByExample(AuthorityExample example);
 
-    List<Authority> selectByUserId(String uid);
-
-    Authority selectByPrimaryKey(String id);
+    Authority selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Authority record, @Param("example") AuthorityExample example);
 
@@ -32,6 +30,4 @@ public interface AuthorityDao {
     int updateByPrimaryKeySelective(Authority record);
 
     int updateByPrimaryKey(Authority record);
-
-
 }

@@ -2,15 +2,13 @@ package com.example.config;
 
 import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author：张鸿建
  * @time：2019/12/25 16:15
  * @desc：
  **/
-@Configuration
+//@Configuration
 public class RedisConfig {
 
     @Value("${spring.redis.host}")
@@ -24,7 +22,7 @@ public class RedisConfig {
     @Value("${spring.redis.database}")
     private int database;
 
-    @Bean
+    //@Bean
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(host);

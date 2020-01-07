@@ -9,7 +9,6 @@ import java.io.Serializable;
  *
  * @author
  */
-@Table(name = "filter")
 public class Filter implements Serializable {
 
     public static int ANON = 1;

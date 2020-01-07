@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.util.ReturnResult;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @desc：
  **/
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/auth")
 public class AdminController {
 
     @RequiresPermissions("user:admin")
@@ -27,5 +28,15 @@ public class AdminController {
         return ReturnResult.ok("root 信息");
     }
 
+    @RequiresRoles(value = {"root","admin"})
+    @GetMapping("/root/role/info")
+    public ReturnResult getRootRoleInfo(){
+        return ReturnResult.ok("root 角色信息");
+    }
 
+    @RequiresRoles(value = {"beijing"})
+    @GetMapping("/beijing/role/info")
+    public ReturnResult getAdminRoleInfo(){
+        return ReturnResult.ok("beijing 角色信息");
+    }
 }

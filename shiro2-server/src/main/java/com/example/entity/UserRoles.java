@@ -3,17 +3,15 @@ package com.example.entity;
 import java.io.Serializable;
 
 /**
- * authority
+ * user_roles
  * @author 
  */
-public class Authority implements Serializable {
+public class UserRoles implements Serializable {
     private Integer id;
-
-    private String authName;
 
     private Integer uid;
 
-    private Integer roleId;
+    private String roleName;
 
     private static final long serialVersionUID = 1L;
 
@@ -25,14 +23,6 @@ public class Authority implements Serializable {
         this.id = id;
     }
 
-    public String getAuthName() {
-        return authName;
-    }
-
-    public void setAuthName(String authName) {
-        this.authName = authName;
-    }
-
     public Integer getUid() {
         return uid;
     }
@@ -41,12 +31,12 @@ public class Authority implements Serializable {
         this.uid = uid;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
@@ -60,11 +50,10 @@ public class Authority implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Authority other = (Authority) that;
+        UserRoles other = (UserRoles) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getAuthName() == null ? other.getAuthName() == null : this.getAuthName().equals(other.getAuthName()))
             && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
+            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()));
     }
 
     @Override
@@ -72,9 +61,8 @@ public class Authority implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getAuthName() == null) ? 0 : getAuthName().hashCode());
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
-        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
+        result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
         return result;
     }
 
@@ -85,9 +73,8 @@ public class Authority implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", authName=").append(authName);
         sb.append(", uid=").append(uid);
-        sb.append(", roleId=").append(roleId);
+        sb.append(", roleName=").append(roleName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

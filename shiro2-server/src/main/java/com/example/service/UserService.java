@@ -2,11 +2,11 @@ package com.example.service;
 
 import com.example.dao.UserDao;
 import com.example.entity.User;
-import com.example.realm.MyAuthorizingRealm;
-import org.apache.commons.lang3.StringUtils;
+import com.example.query.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,19 +21,19 @@ public class UserService {
     private UserDao userDao;
 
     public Optional<User> getUserByUserName(String userName) {
-        String password = MyAuthorizingRealm.MD5Pwd(userName, "123456");
-        User user = new User();
-        user.setPassword(password);
-        user.setUsername("admin");
-        user.setUid("1");
-        System.out.println("加密后密码为："+password);
-        return Optional.of(user);
-    }
-
-    public Optional<User> getUserByUid(String uid) {
-        if (StringUtils.isEmpty(uid)) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUsernameEqualTo(userName);
+        List<User> users = userDao.selectByExample(userExample);
+        if(users!=null){
+            return Optional.of(users.get(0));
+        }else {
             return Optional.of(null);
         }
+
+    }
+
+    public Optional<User> getUserByUid(int uid) {
         User user = userDao.selectByPrimaryKey(uid);
         return Optional.of(user);
     }

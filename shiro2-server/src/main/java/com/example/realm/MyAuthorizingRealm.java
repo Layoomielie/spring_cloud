@@ -2,7 +2,7 @@ package com.example.realm;
 
 import com.example.entity.User;
 import com.example.service.AuthService;
-import com.example.service.RoleService;
+import com.example.service.UserRoleService;
 import com.example.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -31,7 +31,7 @@ public class MyAuthorizingRealm extends AuthorizingRealm {
     private UserService userService;
 
     @Autowired
-    private RoleService roleService;
+    private UserRoleService userRoleService;
 
     @Autowired
     private AuthService authService;
@@ -50,8 +50,10 @@ public class MyAuthorizingRealm extends AuthorizingRealm {
             authorizationInfo = new SimpleAuthorizationInfo();
             //Set<String> roleList = roleService.findRoleByUserId(user.getUid());
             //authorizationInfo.addRoles(roleList);
-            Set<String> authList = authService.findAuthByUserId(user.getUid());
-            authorizationInfo.addStringPermissions(authList);
+            Set<String> userRole = userRoleService.getUserRole(user.getId());
+            Set<String> authSet = authService.findAuthByUserId(user.getId());
+            authorizationInfo.addStringPermissions(authSet);
+            authorizationInfo.addRoles(userRole);
         } catch (Exception e) {
             logger.error("授权失败" + e.toString());
             return null;

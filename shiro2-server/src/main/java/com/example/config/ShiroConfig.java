@@ -13,7 +13,6 @@ import org.crazycake.shiro.RedisManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -31,8 +30,12 @@ public class ShiroConfig {
 
     private Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
-    @Autowired
-    private RedisManager redisManager;
+    private String host="47.99.153.82";
+    private int port=6379;
+    private int timeout=3000;
+    private String password="44253432";
+    private int database=3;
+
 
     //@Autowired
     //private FilterService filterService;
@@ -87,10 +90,20 @@ public class ShiroConfig {
     @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setRedisManager(redisManager);
+        redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }
 
+    @Bean
+    public RedisManager redisManager(){
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost(host);
+        redisManager.setPort(port);
+        redisManager.setPassword(password);
+        redisManager.setDatabase(database);
+        redisManager.setTimeout(timeout);
+        return redisManager;
+    }
     /**
      * @Author: 张鸿建
      * @Date: 2019/12/25
@@ -100,7 +113,7 @@ public class ShiroConfig {
     public AuthorizingRealm authShiroRealm() {
         MyAuthorizingRealm authShiroRealm = new MyAuthorizingRealm();
         authShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-        authShiroRealm.setCachingEnabled(false);
+        authShiroRealm.setCachingEnabled(true);
         return authShiroRealm;
     }
 
