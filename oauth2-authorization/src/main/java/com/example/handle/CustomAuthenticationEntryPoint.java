@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @author：张鸿建
  * @time：2019/12/17 14:05
- * @desc：
+ * @desc：配置未授权返回页面
  **/
 
 @Component
@@ -24,7 +24,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        logger.debug("Pre-authenticated entry point called. Rejecting access");
+        logger.error("Pre-authenticated entry point called. Rejecting access");
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Access Denied");
     }
 }

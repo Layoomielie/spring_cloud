@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Resource
     Oauth2ClientServiceDetail oauth2ClientServiceDetail;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //auth.userDetailsService(this.userDetailsService()).passwordEncoder(this.passwordEncoder());
@@ -105,7 +106,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //demoAppSecret    $2a$10$gCWVItW4t8EbxQqR1unGB.yLMidXOfJTW2Lhjl.0yzwvosQXyDn1W
         //123456    $2a$10$3/5GT5se/lFSMlILrTF6ZOMueuFSUyBCWPa2mhu0SfOFWOCnLZ5uG
         //456789
-        String encode = bCryptPasswordEncoder.encode("456789");
+        String encode = bCryptPasswordEncoder.encode("123456");
         System.out.println(encode);
     }
 

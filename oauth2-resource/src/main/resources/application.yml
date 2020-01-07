@@ -1,16 +1,20 @@
 security:
   oauth2:
     resource:
-      id: oauth2-resource
+      id: springboot
       token-info-uri: http://localhost:5450/oauth/check_token
       #user-info-uri: http://localhost:8080/uaa/user
-      #prefer-token-info: false
-      token-type: client_credentials
+      prefer-token-info: true
+
+      #token-type: client_credentials
     #authorization:
       #check-token-access: http://localhost:5450/oauth/check_token
     client:
-      client-id: admin
-      #client-secret: 456789
+      client-id: springboot
+      client-secret: 123456
+      access-token-uri: http://localhost:5450/oauth/token
+      user-authorization-uri: http://localhost:5450/oauth/authorize
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
