@@ -60,6 +60,7 @@ public class BrowserSecurityConfig  extends WebSecurityConfigurerAdapter {
                 //不需要权限认证的url
                 .antMatchers("/authentication/require",redirectUrl).permitAll()
                 //任何请求
+
                 .anyRequest()
                 //需要身份认证
                 .authenticated()

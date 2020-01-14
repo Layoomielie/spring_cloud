@@ -29,6 +29,7 @@ public class UserService {
         if (StringUtils.isEmpty(username)) {
             logger.error("当前查询用户为空");
             return null;
+
         }
         UsersExample userExample = new UsersExample();
         UsersExample.Criteria criteria = userExample.createCriteria();

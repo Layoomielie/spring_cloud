@@ -15,6 +15,7 @@
         <module>ribbon-service</module>
         <module>zuul-server</module>
         <module>appframework</module>
+        <module>appframework-resource</module>
     </modules>
 
 

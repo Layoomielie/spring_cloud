@@ -21,10 +21,12 @@ public class JWTokenConfig {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
+
+
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-        accessTokenConverter.setSigningKey("test_key"); // 签名密钥
+        accessTokenConverter.setSigningKey("test_key"); // 签名密钥OAuth2AuthenticationManager
         return accessTokenConverter;
     }
 

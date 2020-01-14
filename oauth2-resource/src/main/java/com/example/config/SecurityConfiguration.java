@@ -2,9 +2,11 @@ package com.example.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,7 +21,8 @@ import javax.sql.DataSource;
  * @desc：
  **/
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableWebSecurity
+@EnableWebSecurity
+@Order(value = 5)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,11 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean(name = "AuthenticationManager")
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     /*@Bean
@@ -52,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.jdbcUserDetailsService()).passwordEncoder(this.passwordEncoder());
+        auth.userDetailsService(this.jdbcUserDetailsService()).passwordEncoder(bCryptPasswordEncoder);
 
         //auth.userDetailsService(this.userDetailsService()).passwordEncoder(this.passwordEncoder());
         //auth.userDetailsService(oauth2ClientServiceDetail).passwordEncoder(this.passwordEncoder());
@@ -63,10 +61,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.requestMatchers().antMatchers("/oauth/**", "/login/**", "/logout/**","/api/**")
+        http.requestMatchers().antMatchers("/oauth/**", "/login/**", "/logout/**")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/api/**").hasAuthority( "USER")
                 .and()
                 .formLogin().permitAll();
     }
@@ -76,6 +75,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //String passwordEncode = new MyPasswordEncoder().encode("123456");
         //String passwordEncode = bCryptPasswordEncoder.encode("123456");
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+
         return jdbcUserDetailsManager;
     }
 

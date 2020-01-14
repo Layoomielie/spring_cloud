@@ -19,6 +19,7 @@ public class JWTTokenEnhancer implements TokenEnhancer {
         Map<String, Object> info = new HashMap<>();
         info.put("message", "hello world");
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(info);
+
         return oAuth2AccessToken;
     }
 }

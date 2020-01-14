@@ -2,14 +2,12 @@ package com.example.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * authorities
  * @author 
  */
-@Table(name="authorities")
 public class Authorities implements Serializable {
     @NotEmpty
     private String username;
