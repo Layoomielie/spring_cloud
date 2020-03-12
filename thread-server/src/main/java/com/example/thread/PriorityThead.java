@@ -3,7 +3,7 @@ package com.example.thread;
 /**
  * @author：张鸿建
  * @time：2019/10/9 20:48
- * @desc：
+ * @desc：  线程设置优先级
  **/
 public class PriorityThead extends Thread{
     int count=0;

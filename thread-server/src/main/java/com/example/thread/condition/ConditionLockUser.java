@@ -2,14 +2,13 @@ package com.example.thread.condition;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author：张鸿建
  * @time：2019/11/28 13:33
- * @desc：
+ * @desc：通过lock.newCondition() 获取锁的通知，当condition调用await()时会释放锁资源
  **/
 public class ConditionLockUser {
     ReentrantLock lock = new ReentrantLock();
@@ -34,9 +33,10 @@ public class ConditionLockUser {
         try {
             lock.lock();
             System.out.println(Thread.currentThread().getName() + " 拿到锁了");
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             condition.signalAll();
             System.out.println(Thread.currentThread().getName() + " 发出信号");
+            Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

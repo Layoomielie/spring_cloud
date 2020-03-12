@@ -3,7 +3,7 @@ package com.example.thread;
 /**
  * @author：张鸿建
  * @time：2019/10/9 20:21
- * @desc：
+ * @desc： suspend挂起线程，并不会释放资源
  **/
 public class SuspendThead {
 

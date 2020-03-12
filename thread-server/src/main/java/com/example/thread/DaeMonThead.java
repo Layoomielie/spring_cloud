@@ -3,7 +3,7 @@ package com.example.thread;
 /**
  * @author：张鸿建
  * @time：2019/10/9 20:55
- * @desc：守护线程
+ * @desc：设置守护线程
  **/
 public class DaeMonThead extends Thread{
     private int a=0;

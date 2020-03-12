@@ -9,19 +9,8 @@ import java.util.concurrent.Executors;
  * @time：2019/11/27 11:12
  * @desc：
  **/
-public class Parallellimit {
-    public static void main(String[] args) {
-        ExecutorService pool = Executors.newCachedThreadPool();
-        CountDownLatch cdl = new CountDownLatch(100);
-        for (int i = 0; i < 100; i++) {
-            CountRunnable runnable = new CountRunnable(cdl);
-            pool.execute(runnable);
-        }
-        pool.shutdown();
-    }
-}
 
-class CountRunnable implements Runnable {
+public class CountRunnable implements Runnable {
     private CountDownLatch countDownLatch;
 
     public CountRunnable(CountDownLatch countDownLatch) {
@@ -36,10 +25,23 @@ class CountRunnable implements Runnable {
                 countDownLatch.countDown();
                 System.out.println("thread counts = " + (countDownLatch.getCount()));
             }
+            //System.out.println(Thread.currentThread().getName()+" 线程正在等待释放");
             countDownLatch.await();
-            System.out.println("concurrency counts = " + (100 - countDownLatch.getCount()));
+            System.out.println(Thread.currentThread().getName()+" 线程1S后开始释放");
+            Thread.sleep(1000);
+            System.out.println("concurrency counts = " + (10 - countDownLatch.getCount()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        ExecutorService pool = Executors.newCachedThreadPool();
+        CountDownLatch cdl = new CountDownLatch(10);
+        for (int i = 0; i < 10; i++) {
+            CountRunnable runnable = new CountRunnable(cdl);
+            pool.execute(runnable);
+        }
+        pool.shutdown();
     }
 }

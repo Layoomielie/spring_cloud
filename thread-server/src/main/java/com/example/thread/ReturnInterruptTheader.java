@@ -3,7 +3,7 @@ package com.example.thread;
 /**
  * @author：张鸿建
  * @time：2019/10/9 20:08
- * @desc：
+ * @desc：interrupt打断线程，通过return返回
  **/
 public class ReturnInterruptTheader extends Thread{
 

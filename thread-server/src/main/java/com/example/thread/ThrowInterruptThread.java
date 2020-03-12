@@ -1,11 +1,13 @@
 package com.example.thread;
 
+import com.example.insecurity.demo2.MyThread;
+
 /**
  * @author：张鸿建
  * @time：2019/7/2 14:12
- * @desc：
+ * @desc： main线程调用interrupted打断子线程
  **/
-public class MyThread extends Thread {
+public class ThrowInterruptThread extends Thread {
     @Override
     public void run() {
         try {
@@ -19,7 +21,7 @@ public class MyThread extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("jieshu .. ");
+        System.out.println("线程打断结束 .. ");
     }
     public static void main(String[] args) {
         try {

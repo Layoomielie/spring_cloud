@@ -3,7 +3,7 @@ package com.example.thread;
 /**
  * @author：张鸿建
  * @time：2019/10/9 19:29
- * @desc：
+ * @desc： 测试死锁
  **/
 public class DeadLock {
 

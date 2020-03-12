@@ -3,7 +3,7 @@ package com.example.thread;
 /**
  * @author：张鸿建
  * @time：2019/7/2 14:23
- * @desc：
+ * @desc：join进行线程等待
  **/
 public class JoinThread extends Thread {
     private Thread thread;
@@ -16,7 +16,7 @@ public class JoinThread extends Thread {
     public void run() {
         try {
             thread.join();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 System.out.println(thread.getName() + "的执行 " + i);
             }
         } catch (InterruptedException e) {
